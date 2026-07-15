@@ -23,38 +23,40 @@ const Reviews = () => {
   const averageRating = (reviews.reduce((sum, r) => sum + r.rating, 0) / reviews.length).toFixed(1)
 
   return (
-    <div className="min-h-screen py-8">
-      <div className="container mx-auto px-4">
-        <motion.h1
+    <div className="min-h-screen">
+      <div className="container mx-auto px-6 py-12">
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-4xl font-bold mb-8 text-gray-900"
+          className="mb-8"
         >
-          Customer Reviews
-        </motion.h1>
+          <h1 className="text-4xl font-bold text-gray-900 mb-2">Customer Reviews</h1>
+          <p className="text-gray-500">See what our customers are saying</p>
+        </motion.div>
 
         {/* Stats */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.1 }}
           className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8"
         >
-          <div className="card text-center">
-            <div className="text-4xl font-bold text-blue-600 mb-2">{averageRating}</div>
-            <div className="flex items-center justify-center gap-1 mb-2">
+          <div className="card p-6 text-center">
+            <div className="text-5xl font-bold text-blue-600 mb-3">{averageRating}</div>
+            <div className="flex items-center justify-center gap-1 mb-3">
               {[...Array(5)].map((_, i) => (
-                <Star key={i} className={`w-5 h-5 ${i < Math.round(averageRating) ? 'text-yellow-500 fill-current' : 'text-gray-300'}`} />
+                <Star key={i} className={`w-6 h-6 ${i < Math.round(averageRating) ? 'text-yellow-500 fill-current' : 'text-gray-300'}`} />
               ))}
             </div>
-            <p className="text-gray-500">Average Rating</p>
+            <p className="text-gray-500 font-medium">Average Rating</p>
           </div>
-          <div className="card text-center">
-            <div className="text-4xl font-bold text-blue-600 mb-2">{reviews.length}</div>
-            <p className="text-gray-500">Total Reviews</p>
+          <div className="card p-6 text-center">
+            <div className="text-5xl font-bold text-blue-600 mb-3">{reviews.length}</div>
+            <p className="text-gray-500 font-medium">Total Reviews</p>
           </div>
-          <div className="card text-center">
-            <div className="text-4xl font-bold text-blue-600 mb-2">95%</div>
-            <p className="text-gray-500">Satisfied Customers</p>
+          <div className="card p-6 text-center">
+            <div className="text-5xl font-bold text-blue-600 mb-3">95%</div>
+            <p className="text-gray-500 font-medium">Satisfied Customers</p>
           </div>
         </motion.div>
 
@@ -62,11 +64,12 @@ const Reviews = () => {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="card mb-8"
+          transition={{ delay: 0.2 }}
+          className="card p-6 mb-8"
         >
-          <div className="flex flex-wrap items-center gap-4">
-            <div className="relative flex-1 min-w-[200px]">
-              <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-500 w-5 h-5" />
+          <div className="flex flex-col lg:flex-row gap-4">
+            <div className="relative flex-1">
+              <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
               <input
                 type="text"
                 placeholder="Search reviews..."
@@ -75,8 +78,8 @@ const Reviews = () => {
                 className="input-field w-full pl-12"
               />
             </div>
-            <div className="flex items-center gap-2">
-              <Filter className="w-5 h-5 text-gray-500" />
+            <div className="flex items-center gap-3">
+              <Filter className="w-5 h-5 text-gray-400" />
               <select
                 value={selectedRating}
                 onChange={(e) => setSelectedRating(e.target.value)}
@@ -94,35 +97,40 @@ const Reviews = () => {
         </motion.div>
 
         {/* Reviews List */}
-        <div className="space-y-4">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.3 }}
+          className="space-y-4"
+        >
           {filteredReviews.map((review, index) => (
             <motion.div
               key={review.id}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.05 }}
-              className="card"
+              className="card p-6 hover:shadow-md transition-shadow"
             >
-              <div className="flex gap-4">
-                <div className="w-12 h-12 rounded-full bg-gradient-to-br from-blue-600 to-blue-700 flex items-center justify-center flex-shrink-0">
-                  <User className="w-6 h-6 text-white" />
+              <div className="flex gap-6">
+                <div className="w-14 h-14 rounded-full bg-gradient-to-br from-blue-600 to-blue-700 flex items-center justify-center flex-shrink-0 shadow-lg">
+                  <User className="w-7 h-7 text-white" />
                 </div>
                 <div className="flex-1">
-                  <div className="flex items-center justify-between mb-2">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-3 gap-2">
                     <div>
-                      <h3 className="font-semibold text-gray-900">{review.user}</h3>
+                      <h3 className="font-semibold text-gray-900 text-lg">{review.user}</h3>
                       <p className="text-sm text-gray-500">{review.product}</p>
                     </div>
                     <div className="flex items-center gap-1">
                       {[...Array(5)].map((_, i) => (
-                        <Star key={i} className={`w-4 h-4 ${i < review.rating ? 'text-yellow-500 fill-current' : 'text-gray-300'}`} />
+                        <Star key={i} className={`w-5 h-5 ${i < review.rating ? 'text-yellow-500 fill-current' : 'text-gray-300'}`} />
                       ))}
                     </div>
                   </div>
-                  <p className="text-gray-700 mb-4">{review.comment}</p>
+                  <p className="text-gray-700 mb-4 leading-relaxed">{review.comment}</p>
                   <div className="flex items-center justify-between">
                     <p className="text-sm text-gray-500">{review.date}</p>
-                    <button className="flex items-center gap-2 text-sm text-gray-500 hover:text-blue-600 transition-colors">
+                    <button className="flex items-center gap-2 text-sm text-gray-500 hover:text-blue-600 transition-colors font-medium">
                       <ThumbsUp className="w-4 h-4" />
                       Helpful ({review.helpful})
                     </button>
@@ -131,7 +139,7 @@ const Reviews = () => {
               </div>
             </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </div>
   )

@@ -51,62 +51,76 @@ const Compare = () => {
   }
 
   return (
-    <div className="min-h-screen py-8">
-      <div className="container mx-auto px-4">
-        <motion.h1
+    <div className="min-h-screen">
+      <div className="container mx-auto px-6 py-12">
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-4xl font-bold mb-8 text-gray-900"
+          className="mb-8"
         >
-          Compare Products
-        </motion.h1>
+          <h1 className="text-4xl font-bold text-gray-900 mb-2">Compare Products</h1>
+          <p className="text-gray-500">Compare features and specifications side by side</p>
+        </motion.div>
 
-        <div className="overflow-x-auto">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.1 }}
+          className="card p-6 overflow-x-auto"
+        >
           <table className="w-full">
             <thead>
               <tr>
-                <th className="text-left p-4 text-gray-900">Feature</th>
+                <th className="text-left p-6 text-gray-900 font-semibold text-lg border-b-2 border-gray-200">Feature</th>
                 {products.map(product => (
-                  <th key={product.id} className="p-4 min-w-[250px]">
-                    <img src={product.image} alt={product.name} className="w-32 h-32 object-cover mx-auto rounded-lg mb-4" />
-                    <h3 className="font-semibold text-gray-900">{product.name}</h3>
-                    <p className="text-blue-600 font-bold text-xl">${product.price}</p>
+                  <th key={product.id} className="p-6 min-w-[280px] border-b-2 border-gray-200">
+                    <div className="bg-gray-50 rounded-xl p-4 mb-4">
+                      <img src={product.image} alt={product.name} className="w-40 h-40 object-cover mx-auto rounded-xl shadow-sm mb-4" />
+                      <h3 className="font-semibold text-gray-900 text-lg">{product.name}</h3>
+                      <p className="text-gray-500 text-sm mb-2">{product.brand}</p>
+                      <p className="text-blue-600 font-bold text-2xl">${product.price}</p>
+                    </div>
                   </th>
                 ))}
               </tr>
             </thead>
             <tbody>
               {Object.keys(products[0].specs).map((spec, index) => (
-                <tr key={spec} className={index % 2 === 0 ? 'bg-gray-50' : ''}>
-                  <td className="p-4 font-semibold text-gray-900">{spec}</td>
+                <tr key={spec} className={index % 2 === 0 ? 'bg-gray-50' : 'bg-white'}>
+                  <td className="p-6 font-semibold text-gray-900 border-b border-gray-100">{spec}</td>
                   {products.map(product => (
-                    <td key={product.id} className="p-4 text-center text-gray-700">{product.specs[spec]}</td>
+                    <td key={product.id} className="p-6 text-center text-gray-700 border-b border-gray-100 font-medium">{product.specs[spec]}</td>
                   ))}
                 </tr>
               ))}
             </tbody>
           </table>
-        </div>
+        </motion.div>
 
-        <div className="flex gap-4 mt-8">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2 }}
+          className="flex gap-4 mt-8"
+        >
           {products.map(product => (
-            <div key={product.id} className="flex-1 flex gap-2">
+            <div key={product.id} className="flex-1 flex gap-3">
               <button
                 onClick={() => handleAddToCart(product)}
-                className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg flex-1 flex items-center justify-center gap-2 transition-all"
+                className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-xl flex-1 flex items-center justify-center gap-2 font-semibold shadow-lg hover:shadow-xl transition-all"
               >
                 <ShoppingBag className="w-5 h-5" />
                 Add to Cart
               </button>
               <button
                 onClick={() => handleAddToWishlist(product)}
-                className="bg-gray-200 hover:bg-gray-300 text-gray-800 px-6 py-2 rounded-lg p-2 transition-all"
+                className="bg-gray-200 hover:bg-gray-300 text-gray-800 px-4 py-3 rounded-xl transition-all"
               >
                 <Heart className="w-5 h-5" />
               </button>
             </div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </div>
   )

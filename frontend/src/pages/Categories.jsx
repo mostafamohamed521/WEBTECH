@@ -17,17 +17,18 @@ const Categories = () => {
   ]
 
   return (
-    <div className="min-h-screen py-8">
-      <div className="container mx-auto px-4">
-        <motion.h1
+    <div className="min-h-screen">
+      <div className="container mx-auto px-6 py-12">
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-4xl font-bold mb-8 text-gray-900"
+          className="mb-8"
         >
-          Browse by Category
-        </motion.h1>
+          <h1 className="text-4xl font-bold text-gray-900 mb-2">Browse by Category</h1>
+          <p className="text-gray-500">Find exactly what you're looking for</p>
+        </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {categories.map((category, index) => (
             <motion.div
               key={category.name}
@@ -35,13 +36,17 @@ const Categories = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.05 }}
             >
-              <Link to={`/categories/${category.name.toLowerCase()}`} className="card group hover:scale-105 transition-transform">
-                <div className={`w-20 h-20 mx-auto mb-4 rounded-2xl bg-gradient-to-br ${category.color} flex items-center justify-center group-hover:scale-110 transition-transform`}>
-                  <category.icon className="w-10 h-10 text-white" />
+              <Link to={`/categories/${category.name.toLowerCase()}`} className="group">
+                <div className="card p-6 hover:shadow-lg transition-all duration-300 group-hover:-translate-y-1">
+                  <div className={`w-20 h-20 mx-auto mb-4 rounded-2xl bg-gradient-to-br ${category.color} flex items-center justify-center shadow-md group-hover:scale-110 transition-transform duration-300`}>
+                    <category.icon className="w-10 h-10 text-white" />
+                  </div>
+                  <h3 className="text-xl font-semibold mb-2 text-gray-900 text-center group-hover:text-blue-600 transition-colors">{category.name}</h3>
+                  <p className="text-gray-500 text-sm mb-3 text-center line-clamp-2">{category.description}</p>
+                  <div className="flex items-center justify-center">
+                    <span className="text-blue-600 font-semibold">{category.count} Products</span>
+                  </div>
                 </div>
-                <h3 className="text-xl font-semibold mb-2 text-gray-900">{category.name}</h3>
-                <p className="text-gray-500 text-sm mb-3">{category.description}</p>
-                <p className="text-blue-600 font-semibold">{category.count} Products</p>
               </Link>
             </motion.div>
           ))}
