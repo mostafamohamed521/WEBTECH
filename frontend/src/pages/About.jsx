@@ -19,27 +19,29 @@ const About = () => {
   ]
 
   return (
-    <div className="min-h-screen py-8">
-      <div className="container mx-auto px-4">
-        <motion.h1
+    <div className="min-h-screen">
+      <div className="container mx-auto px-6 py-12">
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-4xl font-bold mb-8"
+          className="mb-8"
         >
-          About WEBTECH
-        </motion.h1>
+          <h1 className="text-4xl font-bold text-gray-900 mb-2">About WEBTECH</h1>
+          <p className="text-gray-500">Learn more about our company and values</p>
+        </motion.div>
 
         {/* Hero Section */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="card mb-12"
+          transition={{ delay: 0.1 }}
+          className="card p-8 mb-12"
         >
-          <h2 className="text-3xl font-bold mb-4">Your Trusted Technology Partner</h2>
-          <p className="text-gray-300 text-lg mb-6">
+          <h2 className="text-3xl font-bold mb-4 text-gray-900">Your Trusted Technology Partner</h2>
+          <p className="text-gray-600 text-lg mb-6 leading-relaxed">
             Founded in 2020, WEBTECH has grown from a small startup to a leading electronics retailer. We believe that everyone deserves access to the latest technology at fair prices.
           </p>
-          <p className="text-gray-300">
+          <p className="text-gray-600 leading-relaxed">
             Our mission is to make technology accessible to everyone while providing exceptional customer service. We carefully curate our product selection to ensure quality and reliability.
           </p>
         </motion.div>
@@ -48,6 +50,7 @@ const About = () => {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2 }}
           className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12"
         >
           {stats.map((stat, index) => (
@@ -56,10 +59,10 @@ const About = () => {
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: index * 0.1 }}
-              className="card text-center"
+              className="card p-6 text-center"
             >
-              <div className="text-3xl font-bold text-primary mb-2">{stat.number}</div>
-              <div className="text-gray-400">{stat.label}</div>
+              <div className="text-4xl font-bold text-blue-600 mb-2">{stat.number}</div>
+              <div className="text-gray-500 font-medium">{stat.label}</div>
             </motion.div>
           ))}
         </motion.div>
@@ -68,9 +71,10 @@ const About = () => {
         <motion.section
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.3 }}
           className="mb-12"
         >
-          <h2 className="text-2xl font-bold mb-6">Our Values</h2>
+          <h2 className="text-2xl font-bold mb-6 text-gray-900">Our Values</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {values.map((value, index) => (
               <motion.div
@@ -78,11 +82,13 @@ const About = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1 }}
-                className="card text-center"
+                className="card p-6 text-center hover:shadow-md transition-shadow"
               >
-                <value.icon className="w-12 h-12 text-primary mx-auto mb-4" />
-                <h3 className="font-semibold text-lg mb-2">{value.title}</h3>
-                <p className="text-gray-400 text-sm">{value.desc}</p>
+                <div className="w-14 h-14 bg-blue-50 rounded-xl flex items-center justify-center mx-auto mb-4">
+                  <value.icon className="w-7 h-7 text-blue-600" />
+                </div>
+                <h3 className="font-semibold text-lg mb-2 text-gray-900">{value.title}</h3>
+                <p className="text-gray-500 text-sm">{value.desc}</p>
               </motion.div>
             ))}
           </div>
@@ -92,10 +98,11 @@ const About = () => {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="card mb-12"
+          transition={{ delay: 0.4 }}
+          className="card p-8 mb-12"
         >
-          <h2 className="text-2xl font-bold mb-4">Our Story</h2>
-          <div className="space-y-4 text-gray-300">
+          <h2 className="text-2xl font-bold mb-6 text-gray-900">Our Story</h2>
+          <div className="space-y-4 text-gray-600 leading-relaxed">
             <p>
               WEBTECH started with a simple idea: make technology accessible to everyone. Our founders, tech enthusiasts themselves, noticed that many people struggled to find reliable information about electronics and often ended up with products that didn't meet their needs.
             </p>
@@ -112,9 +119,10 @@ const About = () => {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="card"
+          transition={{ delay: 0.5 }}
+          className="card p-8"
         >
-          <h2 className="text-2xl font-bold mb-6">Our Leadership Team</h2>
+          <h2 className="text-2xl font-bold mb-6 text-gray-900">Our Leadership Team</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {[
               { name: 'John Smith', role: 'CEO & Founder', bio: 'Tech visionary with 15+ years of industry experience' },
@@ -128,12 +136,12 @@ const About = () => {
                 transition={{ delay: index * 0.1 }}
                 className="text-center"
               >
-                <div className="w-20 h-20 mx-auto mb-4 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center">
-                  <span className="text-2xl font-bold">{member.name.charAt(0)}</span>
+                <div className="w-24 h-24 mx-auto mb-4 rounded-full bg-gradient-to-br from-blue-600 to-blue-700 flex items-center justify-center shadow-lg">
+                  <span className="text-2xl font-bold text-white">{member.name.charAt(0)}</span>
                 </div>
-                <h3 className="font-semibold">{member.name}</h3>
-                <p className="text-primary text-sm mb-2">{member.role}</p>
-                <p className="text-gray-400 text-sm">{member.bio}</p>
+                <h3 className="font-semibold text-gray-900 text-lg">{member.name}</h3>
+                <p className="text-blue-600 text-sm mb-2 font-medium">{member.role}</p>
+                <p className="text-gray-500 text-sm">{member.bio}</p>
               </motion.div>
             ))}
           </div>

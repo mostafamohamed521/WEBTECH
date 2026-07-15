@@ -50,21 +50,23 @@ const FAQ = () => {
   })).filter(category => category.questions.length > 0)
 
   return (
-    <div className="min-h-screen py-8">
-      <div className="container mx-auto px-4">
-        <motion.h1
+    <div className="min-h-screen">
+      <div className="container mx-auto px-6 py-12">
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-4xl font-bold mb-8"
+          className="mb-8"
         >
-          Frequently Asked Questions
-        </motion.h1>
+          <h1 className="text-4xl font-bold text-gray-900 mb-2">Frequently Asked Questions</h1>
+          <p className="text-gray-500">Find answers to common questions</p>
+        </motion.div>
 
         {/* Search */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="card mb-8"
+          transition={{ delay: 0.1 }}
+          className="card p-6 mb-8"
         >
           <div className="relative">
             <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
@@ -87,16 +89,16 @@ const FAQ = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: categoryIndex * 0.1 }}
             >
-              <h2 className="text-2xl font-bold mb-4">{category.category}</h2>
+              <h2 className="text-2xl font-bold mb-6 text-gray-900">{category.category}</h2>
               <div className="space-y-4">
                 {category.questions.map((qa, index) => (
-                  <div key={index} className="card">
+                  <div key={index} className="card p-6 hover:shadow-md transition-shadow">
                     <button
                       onClick={() => setOpenIndex(openIndex === `${categoryIndex}-${index}` ? null : `${categoryIndex}-${index}`)}
                       className="w-full flex items-center justify-between text-left"
                     >
-                      <span className="font-semibold">{qa.q}</span>
-                      <ChevronDown className={`w-5 h-5 transition-transform ${openIndex === `${categoryIndex}-${index}` ? 'rotate-180' : ''}`} />
+                      <span className="font-semibold text-gray-900">{qa.q}</span>
+                      <ChevronDown className={`w-5 h-5 text-gray-500 transition-transform ${openIndex === `${categoryIndex}-${index}` ? 'rotate-180' : ''}`} />
                     </button>
                     <AnimatePresence>
                       {openIndex === `${categoryIndex}-${index}` && (
@@ -104,7 +106,7 @@ const FAQ = () => {
                           initial={{ height: 0, opacity: 0 }}
                           animate={{ height: 'auto', opacity: 1 }}
                           exit={{ height: 0, opacity: 0 }}
-                          className="pt-4 text-gray-300"
+                          className="pt-4 text-gray-600 leading-relaxed"
                         >
                           {qa.a}
                         </motion.div>
@@ -121,24 +123,31 @@ const FAQ = () => {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="card mt-12"
+          transition={{ delay: 0.5 }}
+          className="card p-8 mt-12"
         >
-          <h2 className="text-2xl font-bold mb-6">Still need help?</h2>
+          <h2 className="text-2xl font-bold mb-6 text-gray-900">Still need help?</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="text-center">
-              <MessageCircle className="w-8 h-8 text-primary mx-auto mb-2" />
-              <h3 className="font-semibold mb-1">Live Chat</h3>
-              <p className="text-sm text-gray-400">Available 24/7</p>
+            <div className="text-center p-6 bg-blue-50 rounded-xl">
+              <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center mx-auto mb-3">
+                <MessageCircle className="w-6 h-6 text-blue-600" />
+              </div>
+              <h3 className="font-semibold mb-1 text-gray-900">Live Chat</h3>
+              <p className="text-sm text-gray-500">Available 24/7</p>
             </div>
-            <div className="text-center">
-              <Mail className="w-8 h-8 text-primary mx-auto mb-2" />
-              <h3 className="font-semibold mb-1">Email Us</h3>
-              <p className="text-sm text-gray-400">support@webtech.com</p>
+            <div className="text-center p-6 bg-blue-50 rounded-xl">
+              <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center mx-auto mb-3">
+                <Mail className="w-6 h-6 text-blue-600" />
+              </div>
+              <h3 className="font-semibold mb-1 text-gray-900">Email Us</h3>
+              <p className="text-sm text-gray-500">support@webtech.com</p>
             </div>
-            <div className="text-center">
-              <Phone className="w-8 h-8 text-primary mx-auto mb-2" />
-              <h3 className="font-semibold mb-1">Call Us</h3>
-              <p className="text-sm text-gray-400">1-800-WEBTECH</p>
+            <div className="text-center p-6 bg-blue-50 rounded-xl">
+              <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center mx-auto mb-3">
+                <Phone className="w-6 h-6 text-blue-600" />
+              </div>
+              <h3 className="font-semibold mb-1 text-gray-900">Call Us</h3>
+              <p className="text-sm text-gray-500">1-800-WEBTECH</p>
             </div>
           </div>
         </motion.div>
