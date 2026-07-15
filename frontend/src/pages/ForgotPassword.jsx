@@ -30,23 +30,23 @@ const ForgotPassword = () => {
           className="max-w-md mx-auto"
         >
           <div className="card">
-            <Link to="/login" className="flex items-center gap-2 text-gray-400 hover:text-primary mb-6">
+            <Link to="/login" className="flex items-center gap-2 text-gray-500 hover:text-blue-600 mb-6">
               <ArrowLeft className="w-4 h-4" />
               Back to Login
             </Link>
 
             {!submitted ? (
               <>
-                <h1 className="text-3xl font-bold mb-2">Forgot Password?</h1>
-                <p className="text-gray-400 mb-8">
+                <h1 className="text-3xl font-bold mb-2 text-gray-900">Forgot Password?</h1>
+                <p className="text-gray-500 mb-8">
                   Enter your email address and we'll send you a link to reset your password.
                 </p>
 
                 <form onSubmit={handleSubmit} className="space-y-6">
                   <div>
-                    <label className="block text-sm font-medium mb-2">Email Address</label>
+                    <label className="block text-sm font-medium mb-2 text-gray-700">Email Address</label>
                     <div className="relative">
-                      <Mail className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+                      <Mail className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-500 w-5 h-5" />
                       <input
                         type="email"
                         required
@@ -61,7 +61,7 @@ const ForgotPassword = () => {
                   <button
                     type="submit"
                     disabled={loading}
-                    className="btn-primary w-full"
+                    className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg w-full transition-all"
                   >
                     {loading ? 'Sending...' : 'Send Reset Link'}
                   </button>
@@ -70,16 +70,16 @@ const ForgotPassword = () => {
             ) : (
               <div className="text-center">
                 <CheckCircle className="w-20 h-20 text-green-500 mx-auto mb-6" />
-                <h2 className="text-2xl font-bold mb-4">Check Your Email</h2>
-                <p className="text-gray-400 mb-6">
-                  We've sent a password reset link to <span className="text-white">{email}</span>
+                <h2 className="text-2xl font-bold mb-4 text-gray-900">Check Your Email</h2>
+                <p className="text-gray-500 mb-6">
+                  We've sent a password reset link to <span className="text-gray-900">{email}</span>
                 </p>
-                <p className="text-sm text-gray-400 mb-6">
+                <p className="text-sm text-gray-500 mb-6">
                   Didn't receive the email? Check your spam folder or try again.
                 </p>
                 <button
                   onClick={() => setSubmitted(false)}
-                  className="btn-secondary w-full"
+                  className="bg-gray-200 hover:bg-gray-300 text-gray-800 px-6 py-2 rounded-lg w-full transition-all"
                 >
                   Try Again
                 </button>

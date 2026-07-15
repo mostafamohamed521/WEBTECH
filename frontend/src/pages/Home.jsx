@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
-import { ShoppingBag, Smartphone, Headphones, Camera, Gamepad2, ArrowRight, Star } from 'lucide-react'
+import { ShoppingBag, Smartphone, Laptop, Headphones, Camera, Gamepad2, ArrowRight, Star, Heart } from 'lucide-react'
 import useStore from '../context/StoreContext'
 import toast from 'react-hot-toast'
 
@@ -71,12 +71,11 @@ const Home = () => {
           animate={{ opacity: 1, y: 0 }}
           className="mb-12"
         >
-          <div className="bg-gradient-to-r from-primary to-secondary rounded-2xl p-12 text-center relative overflow-hidden">
-            <div className="absolute inset-0 bg-black/20" />
+          <div className="bg-gradient-to-r from-blue-600 to-blue-700 rounded-2xl p-12 text-center relative overflow-hidden">
             <div className="relative z-10">
-              <h1 className="text-5xl font-bold mb-4">Welcome to WEBTECH</h1>
-              <p className="text-xl mb-8 opacity-90">Discover the latest in technology</p>
-              <Link to="/products" className="btn-primary inline-flex items-center gap-2">
+              <h1 className="text-5xl font-bold mb-4 text-white">Welcome to WEBTECH</h1>
+              <p className="text-xl mb-8 text-white/90">Discover the latest in technology</p>
+              <Link to="/products" className="bg-white text-blue-600 hover:bg-gray-100 px-6 py-2 rounded-lg inline-flex items-center gap-2 transition-all">
                 Shop Now <ArrowRight className="w-5 h-5" />
               </Link>
             </div>
@@ -103,8 +102,8 @@ const Home = () => {
                   <div className={`w-16 h-16 mx-auto mb-3 rounded-full bg-gradient-to-br ${category.color} flex items-center justify-center`}>
                     <category.icon className="w-8 h-8 text-white" />
                   </div>
-                  <h3 className="font-semibold">{category.name}</h3>
-                  <p className="text-sm text-gray-400">{category.count} Products</p>
+                  <h3 className="font-semibold text-gray-900">{category.name}</h3>
+                  <p className="text-sm text-gray-500">{category.count} Products</p>
                 </Link>
               </motion.div>
             ))}
@@ -144,15 +143,15 @@ const Home = () => {
                 </div>
                 <h3 className="font-semibold mb-2">{product.name}</h3>
                 <div className="flex items-center gap-1 mb-2">
-                  <Star className="w-4 h-4 text-yellow-400 fill-current" />
-                  <span className="text-sm">{product.rating}</span>
-                  <span className="text-sm text-gray-400">({product.reviews})</span>
+                  <Star className="w-4 h-4 text-yellow-500 fill-current" />
+                  <span className="text-sm text-gray-700">{product.rating}</span>
+                  <span className="text-sm text-gray-500">({product.reviews})</span>
                 </div>
                 <div className="flex items-center justify-between">
-                  <span className="text-xl font-bold text-primary">${product.price}</span>
+                  <span className="text-xl font-bold text-blue-600">${product.price}</span>
                   <button
                     onClick={() => handleAddToCart(product)}
-                    className="btn-primary text-sm"
+                    className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm transition-all"
                   >
                     Add to Cart
                   </button>

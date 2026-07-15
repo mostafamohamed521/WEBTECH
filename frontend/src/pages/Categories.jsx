@@ -22,7 +22,7 @@ const Categories = () => {
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-4xl font-bold mb-8"
+          className="text-4xl font-bold mb-8 text-gray-900"
         >
           Browse by Category
         </motion.h1>
@@ -39,9 +39,9 @@ const Categories = () => {
                 <div className={`w-20 h-20 mx-auto mb-4 rounded-2xl bg-gradient-to-br ${category.color} flex items-center justify-center group-hover:scale-110 transition-transform`}>
                   <category.icon className="w-10 h-10 text-white" />
                 </div>
-                <h3 className="text-xl font-semibold mb-2">{category.name}</h3>
-                <p className="text-gray-400 text-sm mb-3">{category.description}</p>
-                <p className="text-primary font-semibold">{category.count} Products</p>
+                <h3 className="text-xl font-semibold mb-2 text-gray-900">{category.name}</h3>
+                <p className="text-gray-500 text-sm mb-3">{category.description}</p>
+                <p className="text-blue-600 font-semibold">{category.count} Products</p>
               </Link>
             </motion.div>
           ))}

@@ -62,7 +62,7 @@ const Orders = () => {
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-4xl font-bold mb-8"
+          className="text-4xl font-bold mb-8 text-gray-900"
         >
           Order History
         </motion.h1>
@@ -78,22 +78,22 @@ const Orders = () => {
             >
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-4">
-                  <div className="p-3 bg-gray-800 rounded-lg">
-                    <Package className="w-6 h-6" />
+                  <div className="p-3 bg-gray-100 rounded-lg">
+                    <Package className="w-6 h-6 text-gray-600" />
                   </div>
                   <div>
-                    <h3 className="font-semibold">{order.id}</h3>
-                    <p className="text-sm text-gray-400">{order.date}</p>
+                    <h3 className="font-semibold text-gray-900">{order.id}</h3>
+                    <p className="text-sm text-gray-500">{order.date}</p>
                   </div>
                 </div>
                 <div className="flex items-center gap-8">
                   <div className="text-center">
-                    <p className="text-sm text-gray-400">Items</p>
-                    <p className="font-semibold">{order.items}</p>
+                    <p className="text-sm text-gray-500">Items</p>
+                    <p className="font-semibold text-gray-900">{order.items}</p>
                   </div>
                   <div className="text-center">
-                    <p className="text-sm text-gray-400">Total</p>
-                    <p className="font-semibold">${order.total.toFixed(2)}</p>
+                    <p className="text-sm text-gray-500">Total</p>
+                    <p className="font-semibold text-gray-900">${order.total.toFixed(2)}</p>
                   </div>
                   <div className="flex items-center gap-2">
                     {getStatusIcon(order.status)}

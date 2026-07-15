@@ -30,9 +30,9 @@ const Cart = () => {
             animate={{ opacity: 1, y: 0 }}
             className="text-center py-12"
           >
-            <ShoppingBag className="w-24 h-24 text-gray-600 mx-auto mb-4" />
-            <h2 className="text-2xl font-bold mb-4">Your cart is empty</h2>
-            <Link to="/products" className="btn-primary inline-flex items-center gap-2">
+            <ShoppingBag className="w-24 h-24 text-gray-400 mx-auto mb-4" />
+            <h2 className="text-2xl font-bold mb-4 text-gray-900">Your cart is empty</h2>
+            <Link to="/products" className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg inline-flex items-center gap-2 transition-all">
               Continue Shopping <ArrowRight className="w-5 h-5" />
             </Link>
           </motion.div>
@@ -70,34 +70,34 @@ const Cart = () => {
                     className="w-24 h-24 object-cover rounded-lg"
                   />
                   <div className="flex-1">
-                    <h3 className="font-semibold mb-2">{item.name}</h3>
-                    <p className="text-primary font-bold mb-4">${item.price}</p>
+                    <h3 className="font-semibold mb-2 text-gray-900">{item.name}</h3>
+                    <p className="text-blue-600 font-bold mb-4">${item.price}</p>
                     <div className="flex items-center gap-4">
                       <div className="flex items-center gap-2">
                         <button
                           onClick={() => handleQuantityChange(item.id, item.quantity - 1)}
-                          className="p-1 border border-gray-700 rounded hover:border-primary transition-colors"
+                          className="p-1 border border-gray-300 rounded hover:border-blue-600 transition-colors"
                         >
-                          <Minus className="w-4 h-4" />
+                          <Minus className="w-4 h-4 text-gray-600" />
                         </button>
-                        <span className="w-8 text-center">{item.quantity}</span>
+                        <span className="w-8 text-center text-gray-900">{item.quantity}</span>
                         <button
                           onClick={() => handleQuantityChange(item.id, item.quantity + 1)}
-                          className="p-1 border border-gray-700 rounded hover:border-primary transition-colors"
+                          className="p-1 border border-gray-300 rounded hover:border-blue-600 transition-colors"
                         >
-                          <Plus className="w-4 h-4" />
+                          <Plus className="w-4 h-4 text-gray-600" />
                         </button>
                       </div>
                       <button
                         onClick={() => handleRemove(item.id, item.name)}
-                        className="text-red-400 hover:text-red-300 transition-colors"
+                        className="text-red-600 hover:text-red-700 transition-colors"
                       >
                         <Trash2 className="w-5 h-5" />
                       </button>
                     </div>
                   </div>
                   <div className="text-right">
-                    <p className="text-xl font-bold">${(item.price * item.quantity).toFixed(2)}</p>
+                    <p className="text-xl font-bold text-gray-900">${(item.price * item.quantity).toFixed(2)}</p>
                   </div>
                 </div>
               </motion.div>
@@ -111,27 +111,27 @@ const Cart = () => {
               animate={{ opacity: 1, y: 0 }}
               className="card sticky top-24"
             >
-              <h2 className="text-xl font-bold mb-6">Order Summary</h2>
+              <h2 className="text-xl font-bold mb-6 text-gray-900">Order Summary</h2>
               <div className="space-y-4 mb-6">
                 <div className="flex justify-between">
-                  <span className="text-gray-400">Subtotal</span>
-                  <span>${subtotal.toFixed(2)}</span>
+                  <span className="text-gray-500">Subtotal</span>
+                  <span className="text-gray-900">${subtotal.toFixed(2)}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-gray-400">Shipping</span>
-                  <span>{shipping === 0 ? 'Free' : `$${shipping.toFixed(2)}`}</span>
+                  <span className="text-gray-500">Shipping</span>
+                  <span className="text-gray-900">{shipping === 0 ? 'Free' : `$${shipping.toFixed(2)}`}</span>
                 </div>
-                <div className="border-t border-gray-800 pt-4 flex justify-between font-bold text-lg">
-                  <span>Total</span>
-                  <span>${total.toFixed(2)}</span>
+                <div className="border-t border-gray-200 pt-4 flex justify-between font-bold text-lg">
+                  <span className="text-gray-900">Total</span>
+                  <span className="text-blue-600">${total.toFixed(2)}</span>
                 </div>
               </div>
-              <Link to="/checkout" className="btn-primary w-full flex items-center justify-center gap-2 mb-4">
+              <Link to="/checkout" className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg w-full flex items-center justify-center gap-2 mb-4 transition-all">
                 Proceed to Checkout <ArrowRight className="w-5 h-5" />
               </Link>
               <button
                 onClick={clearCart}
-                className="w-full text-red-400 hover:text-red-300 transition-colors"
+                className="w-full text-red-600 hover:text-red-700 transition-colors"
               >
                 Clear Cart
               </button>

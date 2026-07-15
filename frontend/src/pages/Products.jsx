@@ -77,7 +77,7 @@ const Products = () => {
         >
           <div className="flex flex-wrap items-center gap-4">
             <div className="relative flex-1 min-w-[200px]">
-              <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+              <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-500 w-5 h-5" />
               <input
                 type="text"
                 placeholder="Search products..."
@@ -137,33 +137,33 @@ const Products = () => {
                     className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-300"
                   />
                   {product.featured && (
-                    <span className="absolute top-2 left-2 bg-accent text-white text-xs px-2 py-1 rounded-full">
+                    <span className="absolute top-2 left-2 bg-blue-600 text-white text-xs px-2 py-1 rounded-full">
                       Featured
                     </span>
                   )}
                 </div>
-                <h3 className="font-semibold mb-2">{product.name}</h3>
+                <h3 className="font-semibold mb-2 text-gray-900">{product.name}</h3>
                 <div className="flex items-center gap-1 mb-2">
-                  <Star className="w-4 h-4 text-yellow-400 fill-current" />
-                  <span className="text-sm">{product.rating}</span>
-                  <span className="text-sm text-gray-400">({product.reviews})</span>
+                  <Star className="w-4 h-4 text-yellow-500 fill-current" />
+                  <span className="text-sm text-gray-700">{product.rating}</span>
+                  <span className="text-sm text-gray-500">({product.reviews})</span>
                 </div>
                 <div className="flex items-center justify-between">
-                  <span className="text-xl font-bold text-primary">${product.price}</span>
+                  <span className="text-xl font-bold text-blue-600">${product.price}</span>
                 </div>
               </Link>
               <div className="flex gap-2 mt-4">
                 <button
                   onClick={() => handleAddToCart(product)}
-                  className="btn-primary flex-1 text-sm"
+                  className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm transition-all flex-1"
                 >
                   Add to Cart
                 </button>
                 <button
                   onClick={() => handleAddToWishlist(product)}
-                  className="p-2 border border-gray-700 rounded-lg hover:border-primary transition-colors"
+                  className="p-2 border border-gray-300 rounded-lg hover:border-blue-600 transition-colors"
                 >
-                  <Heart className="w-5 h-5" />
+                  <Heart className="w-5 h-5 text-gray-600" />
                 </button>
               </div>
             </motion.div>
@@ -176,8 +176,8 @@ const Products = () => {
             animate={{ opacity: 1 }}
             className="text-center py-12"
           >
-            <Filter className="w-16 h-16 text-gray-600 mx-auto mb-4" />
-            <p className="text-gray-400 text-lg">No products found matching your criteria</p>
+            <Filter className="w-16 h-16 text-gray-400 mx-auto mb-4" />
+            <p className="text-gray-500 text-lg">No products found matching your criteria</p>
           </motion.div>
         )}
       </div>

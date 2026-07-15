@@ -28,7 +28,7 @@ const Reviews = () => {
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-4xl font-bold mb-8"
+          className="text-4xl font-bold mb-8 text-gray-900"
         >
           Customer Reviews
         </motion.h1>
@@ -40,21 +40,21 @@ const Reviews = () => {
           className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8"
         >
           <div className="card text-center">
-            <div className="text-4xl font-bold text-primary mb-2">{averageRating}</div>
+            <div className="text-4xl font-bold text-blue-600 mb-2">{averageRating}</div>
             <div className="flex items-center justify-center gap-1 mb-2">
               {[...Array(5)].map((_, i) => (
-                <Star key={i} className={`w-5 h-5 ${i < Math.round(averageRating) ? 'text-yellow-400 fill-current' : 'text-gray-600'}`} />
+                <Star key={i} className={`w-5 h-5 ${i < Math.round(averageRating) ? 'text-yellow-500 fill-current' : 'text-gray-300'}`} />
               ))}
             </div>
-            <p className="text-gray-400">Average Rating</p>
+            <p className="text-gray-500">Average Rating</p>
           </div>
           <div className="card text-center">
-            <div className="text-4xl font-bold text-primary mb-2">{reviews.length}</div>
-            <p className="text-gray-400">Total Reviews</p>
+            <div className="text-4xl font-bold text-blue-600 mb-2">{reviews.length}</div>
+            <p className="text-gray-500">Total Reviews</p>
           </div>
           <div className="card text-center">
-            <div className="text-4xl font-bold text-primary mb-2">95%</div>
-            <p className="text-gray-400">Satisfied Customers</p>
+            <div className="text-4xl font-bold text-blue-600 mb-2">95%</div>
+            <p className="text-gray-500">Satisfied Customers</p>
           </div>
         </motion.div>
 
@@ -66,7 +66,7 @@ const Reviews = () => {
         >
           <div className="flex flex-wrap items-center gap-4">
             <div className="relative flex-1 min-w-[200px]">
-              <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+              <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-500 w-5 h-5" />
               <input
                 type="text"
                 placeholder="Search reviews..."
@@ -76,7 +76,7 @@ const Reviews = () => {
               />
             </div>
             <div className="flex items-center gap-2">
-              <Filter className="w-5 h-5 text-gray-400" />
+              <Filter className="w-5 h-5 text-gray-500" />
               <select
                 value={selectedRating}
                 onChange={(e) => setSelectedRating(e.target.value)}
@@ -104,25 +104,25 @@ const Reviews = () => {
               className="card"
             >
               <div className="flex gap-4">
-                <div className="w-12 h-12 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center flex-shrink-0">
+                <div className="w-12 h-12 rounded-full bg-gradient-to-br from-blue-600 to-blue-700 flex items-center justify-center flex-shrink-0">
                   <User className="w-6 h-6 text-white" />
                 </div>
                 <div className="flex-1">
                   <div className="flex items-center justify-between mb-2">
                     <div>
-                      <h3 className="font-semibold">{review.user}</h3>
-                      <p className="text-sm text-gray-400">{review.product}</p>
+                      <h3 className="font-semibold text-gray-900">{review.user}</h3>
+                      <p className="text-sm text-gray-500">{review.product}</p>
                     </div>
                     <div className="flex items-center gap-1">
                       {[...Array(5)].map((_, i) => (
-                        <Star key={i} className={`w-4 h-4 ${i < review.rating ? 'text-yellow-400 fill-current' : 'text-gray-600'}`} />
+                        <Star key={i} className={`w-4 h-4 ${i < review.rating ? 'text-yellow-500 fill-current' : 'text-gray-300'}`} />
                       ))}
                     </div>
                   </div>
-                  <p className="text-gray-300 mb-4">{review.comment}</p>
+                  <p className="text-gray-700 mb-4">{review.comment}</p>
                   <div className="flex items-center justify-between">
-                    <p className="text-sm text-gray-400">{review.date}</p>
-                    <button className="flex items-center gap-2 text-sm text-gray-400 hover:text-primary transition-colors">
+                    <p className="text-sm text-gray-500">{review.date}</p>
+                    <button className="flex items-center gap-2 text-sm text-gray-500 hover:text-blue-600 transition-colors">
                       <ThumbsUp className="w-4 h-4" />
                       Helpful ({review.helpful})
                     </button>

@@ -26,9 +26,9 @@ const Wishlist = () => {
             animate={{ opacity: 1, y: 0 }}
             className="text-center py-12"
           >
-            <Heart className="w-24 h-24 text-gray-600 mx-auto mb-4" />
-            <h2 className="text-2xl font-bold mb-4">Your wishlist is empty</h2>
-            <Link to="/products" className="btn-primary inline-flex items-center gap-2">
+            <Heart className="w-24 h-24 text-gray-400 mx-auto mb-4" />
+            <h2 className="text-2xl font-bold mb-4 text-gray-900">Your wishlist is empty</h2>
+            <Link to="/products" className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg inline-flex items-center gap-2 transition-all">
               Continue Shopping <ArrowRight className="w-5 h-5" />
             </Link>
           </motion.div>
@@ -70,11 +70,11 @@ const Wishlist = () => {
                   <Trash2 className="w-4 h-4" />
                 </button>
               </div>
-              <h3 className="font-semibold mb-2">{item.name}</h3>
-              <p className="text-xl font-bold text-primary mb-4">${item.price}</p>
+              <h3 className="font-semibold mb-2 text-gray-900">{item.name}</h3>
+              <p className="text-xl font-bold text-blue-600 mb-4">${item.price}</p>
               <button
                 onClick={() => handleAddToCart(item)}
-                className="btn-primary w-full flex items-center justify-center gap-2"
+                className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg w-full flex items-center justify-center gap-2 transition-all"
               >
                 <ShoppingBag className="w-5 h-5" />
                 Add to Cart

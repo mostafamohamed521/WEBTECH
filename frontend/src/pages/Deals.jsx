@@ -50,7 +50,7 @@ const Deals = () => {
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-4xl font-bold mb-8"
+          className="text-4xl font-bold mb-8 text-gray-900"
         >
           Deals & Discounts
         </motion.h1>
@@ -59,16 +59,16 @@ const Deals = () => {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="bg-gradient-to-r from-accent to-red-600 rounded-2xl p-8 mb-8"
+          className="bg-gradient-to-r from-red-600 to-orange-500 rounded-2xl p-8 mb-8"
         >
           <div className="flex items-center justify-between">
             <div>
-              <h2 className="text-3xl font-bold mb-2">Flash Sale!</h2>
-              <p className="opacity-90">Limited time offers on selected products</p>
+              <h2 className="text-3xl font-bold mb-2 text-white">Flash Sale!</h2>
+              <p className="text-white/90">Limited time offers on selected products</p>
             </div>
             <div className="flex items-center gap-4">
-              <Clock className="w-8 h-8" />
-              <div className="text-2xl font-bold">
+              <Clock className="w-8 h-8 text-white" />
+              <div className="text-2xl font-bold text-white">
                 {String(timeLeft.hours).padStart(2, '0')}:{String(timeLeft.minutes).padStart(2, '0')}:{String(timeLeft.seconds).padStart(2, '0')}
               </div>
             </div>
@@ -81,7 +81,7 @@ const Deals = () => {
           animate={{ opacity: 1, y: 0 }}
           className="mb-12"
         >
-          <h2 className="text-2xl font-bold mb-6">Flash Sale Products</h2>
+          <h2 className="text-2xl font-bold mb-6 text-gray-900">Flash Sale Products</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {flashSales.map((product, index) => (
               <motion.div
@@ -91,16 +91,16 @@ const Deals = () => {
                 transition={{ delay: index * 0.1 }}
                 className="card relative overflow-hidden"
               >
-                <div className="absolute top-4 left-4 bg-accent text-white px-3 py-1 rounded-full text-sm font-bold">
+                <div className="absolute top-4 left-4 bg-red-600 text-white px-3 py-1 rounded-full text-sm font-bold">
                   -{product.discount}%
                 </div>
                 <img src={product.image} alt={product.name} className="w-full h-48 object-cover rounded-lg mb-4" />
-                <h3 className="font-semibold mb-2">{product.name}</h3>
+                <h3 className="font-semibold mb-2 text-gray-900">{product.name}</h3>
                 <div className="flex items-center gap-2 mb-4">
-                  <span className="text-xl font-bold text-primary">${product.salePrice}</span>
+                  <span className="text-xl font-bold text-blue-600">${product.salePrice}</span>
                   <span className="text-gray-400 line-through">${product.originalPrice}</span>
                 </div>
-                <Link to={`/products/${product.id}`} className="btn-primary w-full flex items-center justify-center gap-2">
+                <Link to={`/products/${product.id}`} className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg w-full flex items-center justify-center gap-2 transition-all">
                   View Deal <ArrowRight className="w-5 h-5" />
                 </Link>
               </motion.div>
@@ -114,7 +114,7 @@ const Deals = () => {
           animate={{ opacity: 1, y: 0 }}
           className="mb-12"
         >
-          <h2 className="text-2xl font-bold mb-6">Active Coupons</h2>
+          <h2 className="text-2xl font-bold mb-6 text-gray-900">Active Coupons</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {coupons.map((coupon, index) => (
               <motion.div
@@ -122,20 +122,20 @@ const Deals = () => {
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: index * 0.1 }}
-                className="card border-2 border-dashed border-primary/50"
+                className="card border-2 border-dashed border-blue-600/50"
               >
                 <div className="flex items-center gap-3 mb-4">
-                  <Tag className="w-8 h-8 text-primary" />
+                  <Tag className="w-8 h-8 text-blue-600" />
                   <div>
-                    <p className="text-2xl font-bold text-primary">{coupon.code}</p>
-                    <p className="text-sm text-gray-400">{coupon.discount}</p>
+                    <p className="text-2xl font-bold text-blue-600">{coupon.code}</p>
+                    <p className="text-sm text-gray-500">{coupon.discount}</p>
                   </div>
                 </div>
-                <div className="space-y-2 text-sm text-gray-400 mb-4">
+                <div className="space-y-2 text-sm text-gray-500 mb-4">
                   <p>Min purchase: ${coupon.minPurchase}</p>
                   <p>Expires in: {coupon.expiry}</p>
                 </div>
-                <button className="btn-primary w-full">Copy Code</button>
+                <button className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg w-full transition-all">Copy Code</button>
               </motion.div>
             ))}
           </div>
@@ -146,7 +146,7 @@ const Deals = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
         >
-          <h2 className="text-2xl font-bold mb-6">Categories on Sale</h2>
+          <h2 className="text-2xl font-bold mb-6 text-gray-900">Categories on Sale</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {categoriesOnSale.map((category, index) => (
               <motion.div
@@ -156,10 +156,10 @@ const Deals = () => {
                 transition={{ delay: index * 0.1 }}
                 className="card text-center hover:scale-105 transition-transform cursor-pointer"
               >
-                <Percent className="w-12 h-12 text-primary mx-auto mb-4" />
-                <h3 className="font-semibold text-lg mb-2">{category.name}</h3>
-                <p className="text-primary font-bold mb-2">{category.discount}</p>
-                <p className="text-sm text-gray-400">{category.count} products</p>
+                <Percent className="w-12 h-12 text-blue-600 mx-auto mb-4" />
+                <h3 className="font-semibold text-lg mb-2 text-gray-900">{category.name}</h3>
+                <p className="text-blue-600 font-bold mb-2">{category.discount}</p>
+                <p className="text-sm text-gray-500">{category.count} products</p>
               </motion.div>
             ))}
           </div>

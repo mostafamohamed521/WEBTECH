@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
-import { Search, Clock, X } from 'lucide-react'
+import { Search as SearchIcon, Clock, X } from 'lucide-react'
 import useStore from '../context/StoreContext'
 import toast from 'react-hot-toast'
 
@@ -44,11 +44,11 @@ const Search = () => {
           animate={{ opacity: 1, y: 0 }}
           className="max-w-2xl mx-auto"
         >
-          <h1 className="text-4xl font-bold mb-8 text-center">Search</h1>
+          <h1 className="text-4xl font-bold mb-8 text-center text-gray-900">Search</h1>
 
           {/* Search Input */}
           <div className="relative mb-8">
-            <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+            <SearchIcon className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-500 w-5 h-5" />
             <input
               type="text"
               value={query}
@@ -60,7 +60,7 @@ const Search = () => {
             {query && (
               <button
                 onClick={() => setQuery('')}
-                className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-white"
+                className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-900"
               >
                 <X className="w-5 h-5" />
               </button>
@@ -71,17 +71,17 @@ const Search = () => {
           {!query && searchHistory.length > 0 && (
             <div className="card mb-8">
               <div className="flex items-center justify-between mb-4">
-                <h2 className="font-semibold">Recent Searches</h2>
-                <button className="text-sm text-primary hover:underline">Clear all</button>
+                <h2 className="font-semibold text-gray-900">Recent Searches</h2>
+                <button className="text-sm text-blue-600 hover:underline">Clear all</button>
               </div>
               <div className="flex flex-wrap gap-2">
                 {searchHistory.map((item, index) => (
                   <button
                     key={index}
                     onClick={() => setQuery(item)}
-                    className="flex items-center gap-2 px-3 py-2 bg-gray-800 rounded-lg hover:bg-gray-700 transition-colors"
+                    className="flex items-center gap-2 px-3 py-2 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors text-gray-700"
                   >
-                    <Clock className="w-4 h-4 text-gray-400" />
+                    <Clock className="w-4 h-4 text-gray-500" />
                     {item}
                   </button>
                 ))}
@@ -92,7 +92,7 @@ const Search = () => {
           {/* Search Results */}
           {query && (
             <div>
-              <h2 className="font-semibold mb-4">
+              <h2 className="font-semibold mb-4 text-gray-900">
                 {filteredProducts.length} results for "{query}"
               </h2>
               <div className="space-y-4">
@@ -113,21 +113,21 @@ const Search = () => {
                       </Link>
                       <div className="flex-1">
                         <Link to={`/products/${product.id}`}>
-                          <h3 className="font-semibold mb-1 hover:text-primary transition-colors">{product.name}</h3>
+                          <h3 className="font-semibold mb-1 hover:text-blue-600 transition-colors text-gray-900">{product.name}</h3>
                         </Link>
-                        <p className="text-sm text-gray-400 mb-2 capitalize">{product.category}</p>
-                        <p className="text-xl font-bold text-primary">${product.price}</p>
+                        <p className="text-sm text-gray-500 mb-2 capitalize">{product.category}</p>
+                        <p className="text-xl font-bold text-blue-600">${product.price}</p>
                       </div>
                       <div className="flex flex-col gap-2">
                         <button
                           onClick={() => handleAddToCart(product)}
-                          className="btn-primary text-sm"
+                          className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm transition-all"
                         >
                           Add to Cart
                         </button>
                         <button
                           onClick={() => handleAddToWishlist(product)}
-                          className="btn-secondary text-sm"
+                          className="bg-gray-200 hover:bg-gray-300 text-gray-800 px-4 py-2 rounded-lg text-sm transition-all"
                         >
                           Wishlist
                         </button>
@@ -139,8 +139,8 @@ const Search = () => {
 
               {filteredProducts.length === 0 && (
                 <div className="text-center py-12">
-                  <Search className="w-16 h-16 text-gray-600 mx-auto mb-4" />
-                  <p className="text-gray-400">No products found for "{query}"</p>
+                  <SearchIcon className="w-16 h-16 text-gray-400 mx-auto mb-4" />
+                  <p className="text-gray-500">No products found for "{query}"</p>
                 </div>
               )}
             </div>

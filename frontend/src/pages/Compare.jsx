@@ -56,7 +56,7 @@ const Compare = () => {
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-4xl font-bold mb-8"
+          className="text-4xl font-bold mb-8 text-gray-900"
         >
           Compare Products
         </motion.h1>
@@ -65,22 +65,22 @@ const Compare = () => {
           <table className="w-full">
             <thead>
               <tr>
-                <th className="text-left p-4">Feature</th>
+                <th className="text-left p-4 text-gray-900">Feature</th>
                 {products.map(product => (
                   <th key={product.id} className="p-4 min-w-[250px]">
                     <img src={product.image} alt={product.name} className="w-32 h-32 object-cover mx-auto rounded-lg mb-4" />
-                    <h3 className="font-semibold">{product.name}</h3>
-                    <p className="text-primary font-bold text-xl">${product.price}</p>
+                    <h3 className="font-semibold text-gray-900">{product.name}</h3>
+                    <p className="text-blue-600 font-bold text-xl">${product.price}</p>
                   </th>
                 ))}
               </tr>
             </thead>
             <tbody>
               {Object.keys(products[0].specs).map((spec, index) => (
-                <tr key={spec} className={index % 2 === 0 ? 'bg-gray-800/50' : ''}>
-                  <td className="p-4 font-semibold">{spec}</td>
+                <tr key={spec} className={index % 2 === 0 ? 'bg-gray-50' : ''}>
+                  <td className="p-4 font-semibold text-gray-900">{spec}</td>
                   {products.map(product => (
-                    <td key={product.id} className="p-4 text-center">{product.specs[spec]}</td>
+                    <td key={product.id} className="p-4 text-center text-gray-700">{product.specs[spec]}</td>
                   ))}
                 </tr>
               ))}
@@ -93,14 +93,14 @@ const Compare = () => {
             <div key={product.id} className="flex-1 flex gap-2">
               <button
                 onClick={() => handleAddToCart(product)}
-                className="btn-primary flex-1 flex items-center justify-center gap-2"
+                className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg flex-1 flex items-center justify-center gap-2 transition-all"
               >
                 <ShoppingBag className="w-5 h-5" />
                 Add to Cart
               </button>
               <button
                 onClick={() => handleAddToWishlist(product)}
-                className="btn-secondary p-2"
+                className="bg-gray-200 hover:bg-gray-300 text-gray-800 px-6 py-2 rounded-lg p-2 transition-all"
               >
                 <Heart className="w-5 h-5" />
               </button>

@@ -59,12 +59,12 @@ const ProductDetail = () => {
     <div className="min-h-screen py-8">
       <div className="container mx-auto px-4">
         {/* Breadcrumb */}
-        <div className="flex items-center gap-2 text-sm text-gray-400 mb-6">
-          <Link to="/home" className="hover:text-primary">Home</Link>
+        <div className="flex items-center gap-2 text-sm text-gray-500 mb-6">
+          <Link to="/home" className="hover:text-blue-600">Home</Link>
           <span>/</span>
-          <Link to="/products" className="hover:text-primary">Products</Link>
+          <Link to="/products" className="hover:text-blue-600">Products</Link>
           <span>/</span>
-          <span className="text-white">{product.name}</span>
+          <span className="text-gray-900">{product.name}</span>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-12">
@@ -85,7 +85,7 @@ const ProductDetail = () => {
                 <button
                   key={index}
                   onClick={() => setSelectedImage(index)}
-                  className={`card ${selectedImage === index ? 'border-primary' : ''}`}
+                  className={`card ${selectedImage === index ? 'border-blue-600' : ''}`}
                 >
                   <img src={image} alt={`${product.name} ${index + 1}`} className="w-full h-24 object-contain" />
                 </button>
@@ -98,46 +98,46 @@ const ProductDetail = () => {
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
           >
-            <h1 className="text-3xl font-bold mb-4">{product.name}</h1>
+            <h1 className="text-3xl font-bold mb-4 text-gray-900">{product.name}</h1>
             <div className="flex items-center gap-4 mb-4">
               <div className="flex items-center gap-1">
                 {[...Array(5)].map((_, i) => (
-                  <Star key={i} className={`w-5 h-5 ${i < Math.floor(product.rating) ? 'text-yellow-400 fill-current' : 'text-gray-600'}`} />
+                  <Star key={i} className={`w-5 h-5 ${i < Math.floor(product.rating) ? 'text-yellow-500 fill-current' : 'text-gray-300'}`} />
                 ))}
               </div>
-              <span className="text-gray-400">{product.rating} ({product.reviews} reviews)</span>
+              <span className="text-gray-500">{product.rating} ({product.reviews} reviews)</span>
             </div>
-            <p className="text-3xl font-bold text-primary mb-6">${product.price}</p>
-            <p className="text-gray-300 mb-6">{product.description}</p>
+            <p className="text-3xl font-bold text-blue-600 mb-6">${product.price}</p>
+            <p className="text-gray-700 mb-6">{product.description}</p>
 
             {/* Quantity */}
             <div className="flex items-center gap-4 mb-6">
-              <span className="font-semibold">Quantity:</span>
+              <span className="font-semibold text-gray-900">Quantity:</span>
               <div className="flex items-center gap-2">
                 <button
                   onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                  className="p-2 border border-gray-700 rounded-lg hover:border-primary transition-colors"
+                  className="p-2 border border-gray-300 rounded-lg hover:border-blue-600 transition-colors text-gray-700"
                 >
                   <Minus className="w-4 h-4" />
                 </button>
-                <span className="w-12 text-center">{quantity}</span>
+                <span className="w-12 text-center text-gray-900">{quantity}</span>
                 <button
                   onClick={() => setQuantity(Math.min(product.stock, quantity + 1))}
-                  className="p-2 border border-gray-700 rounded-lg hover:border-primary transition-colors"
+                  className="p-2 border border-gray-300 rounded-lg hover:border-blue-600 transition-colors text-gray-700"
                 >
                   <Plus className="w-4 h-4" />
                 </button>
               </div>
-              <span className="text-gray-400 text-sm">({product.stock} available)</span>
+              <span className="text-gray-500 text-sm">({product.stock} available)</span>
             </div>
 
             {/* Buttons */}
             <div className="flex gap-4 mb-8">
-              <button onClick={handleAddToCart} className="btn-primary flex-1 flex items-center justify-center gap-2">
+              <button onClick={handleAddToCart} className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg flex-1 flex items-center justify-center gap-2 transition-all">
                 <ShoppingBag className="w-5 h-5" />
                 Add to Cart
               </button>
-              <button onClick={handleAddToWishlist} className="btn-secondary p-3">
+              <button onClick={handleAddToWishlist} className="bg-gray-200 hover:bg-gray-300 text-gray-800 px-6 py-2 rounded-lg p-3 transition-all">
                 <Heart className="w-5 h-5" />
               </button>
             </div>
@@ -145,27 +145,27 @@ const ProductDetail = () => {
             {/* Features */}
             <div className="grid grid-cols-3 gap-4 mb-8">
               <div className="card text-center">
-                <Truck className="w-6 h-6 text-primary mx-auto mb-2" />
-                <p className="text-sm">Free Shipping</p>
+                <Truck className="w-6 h-6 text-blue-600 mx-auto mb-2" />
+                <p className="text-sm text-gray-700">Free Shipping</p>
               </div>
               <div className="card text-center">
-                <Shield className="w-6 h-6 text-primary mx-auto mb-2" />
-                <p className="text-sm">2 Year Warranty</p>
+                <Shield className="w-6 h-6 text-blue-600 mx-auto mb-2" />
+                <p className="text-sm text-gray-700">2 Year Warranty</p>
               </div>
               <div className="card text-center">
-                <RotateCcw className="w-6 h-6 text-primary mx-auto mb-2" />
-                <p className="text-sm">30-Day Returns</p>
+                <RotateCcw className="w-6 h-6 text-blue-600 mx-auto mb-2" />
+                <p className="text-sm text-gray-700">30-Day Returns</p>
               </div>
             </div>
 
             {/* Specifications */}
             <div className="card">
-              <h3 className="font-semibold mb-4">Specifications</h3>
+              <h3 className="font-semibold mb-4 text-gray-900">Specifications</h3>
               <div className="space-y-2">
                 {Object.entries(product.specs).map(([key, value]) => (
-                  <div key={key} className="flex justify-between py-2 border-b border-gray-800">
-                    <span className="text-gray-400">{key}</span>
-                    <span>{value}</span>
+                  <div key={key} className="flex justify-between py-2 border-b border-gray-200">
+                    <span className="text-gray-500">{key}</span>
+                    <span className="text-gray-900">{value}</span>
                   </div>
                 ))}
               </div>
@@ -178,13 +178,13 @@ const ProductDetail = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
         >
-          <h2 className="text-2xl font-bold mb-6">Related Products</h2>
+          <h2 className="text-2xl font-bold mb-6 text-gray-900">Related Products</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {relatedProducts.map((product) => (
               <Link key={product.id} to={`/products/${product.id}`} className="card hover:scale-105 transition-transform">
                 <img src={product.image} alt={product.name} className="w-full h-48 object-cover rounded-lg mb-4" />
-                <h3 className="font-semibold mb-2">{product.name}</h3>
-                <p className="text-xl font-bold text-primary">${product.price}</p>
+                <h3 className="font-semibold mb-2 text-gray-900">{product.name}</h3>
+                <p className="text-xl font-bold text-blue-600">${product.price}</p>
               </Link>
             ))}
           </div>

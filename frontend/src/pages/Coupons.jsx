@@ -60,8 +60,7 @@ const Coupons = () => {
                         onClick={() => handleCopy(coupon.code)}
                         className="p-2 bg-gray-800 rounded-lg hover:bg-gray-700 transition-colors"
                       >
-                        {copiedCode === coupon.code ? <Check className="w-4 h-4 text-green-500" : <Copy className="w-4 h-4" />}
-                      </button>
+                        {copiedCode === coupon.code ? <Check className="w-4 h-4 text-green-500" /> : <Copy className="w-4 h-4" />}                      </button>
                     </div>
                     <p className="text-lg font-semibold mb-1">{coupon.discount}</p>
                     <p className="text-sm text-gray-400 mb-2">{coupon.description}</p>

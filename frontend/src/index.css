@@ -4,25 +4,25 @@
 
 @layer base {
   body {
-    @apply bg-darker text-white;
+    @apply bg-gray-50 text-gray-900;
   }
 }
 
 @layer components {
   .btn-primary {
-    @apply bg-primary hover:bg-primary/90 text-white px-6 py-2 rounded-lg transition-all duration-300;
+    @apply bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg transition-colors duration-200;
   }
   
   .btn-secondary {
-    @apply bg-secondary hover:bg-secondary/90 text-white px-6 py-2 rounded-lg transition-all duration-300;
+    @apply bg-gray-200 hover:bg-gray-300 text-gray-800 px-6 py-2 rounded-lg transition-colors duration-200;
   }
   
   .card {
-    @apply bg-dark border border-gray-800 rounded-xl p-6 hover:border-primary/50 transition-all duration-300;
+    @apply bg-white border border-gray-200 rounded-xl p-6 shadow-sm;
   }
   
   .input-field {
-    @apply bg-dark border border-gray-700 rounded-lg px-4 py-2 focus:outline-none focus:border-primary transition-all duration-300;
+    @apply bg-white border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:border-blue-500 transition-colors duration-200;
   }
 }
 
@@ -41,14 +41,14 @@
   }
   
   .custom-scrollbar::-webkit-scrollbar-track {
-    @apply bg-dark;
+    @apply bg-gray-100;
   }
   
   .custom-scrollbar::-webkit-scrollbar-thumb {
-    @apply bg-gray-700 rounded-full;
+    @apply bg-gray-300 rounded-full;
   }
   
   .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-    @apply bg-primary;
+    @apply bg-gray-400;
   }
 }
