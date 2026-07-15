@@ -15,16 +15,26 @@ const Products = () => {
   const categories = ['all', 'smartphones', 'laptops', 'headphones', 'cameras', 'gaming']
 
   const products = [
-    { id: 1, name: 'iPhone 15 Pro Max', price: 1199, category: 'smartphones', rating: 4.8, reviews: 234, image: 'https://images.unsplash.com/photo-1592750475338-74b7b21085ab?w=400', featured: true },
-    { id: 2, name: 'Samsung Galaxy S24 Ultra', price: 1299, category: 'smartphones', rating: 4.7, reviews: 189, image: 'https://images.unsplash.com/photo-1610945415295-d9bbf067e59c?w=400', featured: true },
-    { id: 3, name: 'MacBook Pro 16"', price: 2499, category: 'laptops', rating: 4.9, reviews: 312, image: 'https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=400', featured: true },
-    { id: 4, name: 'Dell XPS 15', price: 1899, category: 'laptops', rating: 4.6, reviews: 156, image: 'https://images.unsplash.com/photo-1593642632559-0c6d3fc62b89?w=400', featured: false },
-    { id: 5, name: 'Sony WH-1000XM5', price: 349, category: 'headphones', rating: 4.8, reviews: 423, image: 'https://images.unsplash.com/photo-1618366712010-f4ae9c647dcb?w=400', featured: true },
-    { id: 6, name: 'Bose QuietComfort Ultra', price: 429, category: 'headphones', rating: 4.7, reviews: 287, image: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400', featured: false },
-    { id: 7, name: 'Canon EOS R5', price: 3899, category: 'cameras', rating: 4.9, reviews: 98, image: 'https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=400', featured: true },
-    { id: 8, name: 'Sony A7 IV', price: 2499, category: 'cameras', rating: 4.8, reviews: 134, image: 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?w=400', featured: false },
-    { id: 9, name: 'PlayStation 5', price: 499, category: 'gaming', rating: 4.9, reviews: 567, image: 'https://images.unsplash.com/photo-1606813907291-d86efa9b94db?w=400', featured: true },
-    { id: 10, name: 'Xbox Series X', price: 499, category: 'gaming', rating: 4.8, reviews: 432, image: 'https://images.unsplash.com/photo-1621259182978-fbf93132d53d?w=400', featured: false },
+    { id: 1, name: 'iPhone 15 Pro Max', price: 1199, category: 'smartphones', rating: 4.8, reviews: 234, image: 'https://images.unsplash.com/photo-1592750475338-74b7b21085ab?w=400', featured: true, brand: 'Apple', stock: 15 },
+    { id: 2, name: 'Samsung Galaxy S24 Ultra', price: 1299, category: 'smartphones', rating: 4.7, reviews: 189, image: 'https://images.unsplash.com/photo-1610945415295-d9bbf067e59c?w=400', featured: true, brand: 'Samsung', stock: 23 },
+    { id: 3, name: 'Google Pixel 8 Pro', price: 999, category: 'smartphones', rating: 4.6, reviews: 156, image: 'https://images.unsplash.com/photo-1598327105666-5b89351aff97?w=400', featured: false, brand: 'Google', stock: 18 },
+    { id: 4, name: 'OnePlus 12', price: 799, category: 'smartphones', rating: 4.5, reviews: 98, image: 'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=400', featured: false, brand: 'OnePlus', stock: 12 },
+    { id: 5, name: 'MacBook Pro 16"', price: 2499, category: 'laptops', rating: 4.9, reviews: 312, image: 'https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=400', featured: true, brand: 'Apple', stock: 8 },
+    { id: 6, name: 'Dell XPS 15', price: 1899, category: 'laptops', rating: 4.6, reviews: 156, image: 'https://images.unsplash.com/photo-1593642632559-0c6d3fc62b89?w=400', featured: false, brand: 'Dell', stock: 14 },
+    { id: 7, name: 'HP Spectre x360', price: 1599, category: 'laptops', rating: 4.5, reviews: 134, image: 'https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?w=400', featured: false, brand: 'HP', stock: 19 },
+    { id: 8, name: 'Lenovo ThinkPad X1', price: 1799, category: 'laptops', rating: 4.7, reviews: 178, image: 'https://images.unsplash.com/photo-1589578228447-e1a4e481c6c8?w=400', featured: false, brand: 'Lenovo', stock: 11 },
+    { id: 9, name: 'Sony WH-1000XM5', price: 349, category: 'headphones', rating: 4.8, reviews: 423, image: 'https://images.unsplash.com/photo-1618366712010-f4ae9c647dcb?w=400', featured: true, brand: 'Sony', stock: 45 },
+    { id: 10, name: 'Bose QuietComfort Ultra', price: 429, category: 'headphones', rating: 4.7, reviews: 287, image: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400', featured: false, brand: 'Bose', stock: 32 },
+    { id: 11, name: 'AirPods Pro 2', price: 249, category: 'headphones', rating: 4.6, reviews: 567, image: 'https://images.unsplash.com/photo-1600294037681-c80b4cb5b434?w=400', featured: false, brand: 'Apple', stock: 67 },
+    { id: 12, name: 'Sennheiser Momentum 4', price: 399, category: 'headphones', rating: 4.5, reviews: 145, image: 'https://images.unsplash.com/photo-1546435770-a3e426bf472b?w=400', featured: false, brand: 'Sennheiser', stock: 28 },
+    { id: 13, name: 'Canon EOS R5', price: 3899, category: 'cameras', rating: 4.9, reviews: 98, image: 'https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=400', featured: true, brand: 'Canon', stock: 5 },
+    { id: 14, name: 'Sony A7 IV', price: 2499, category: 'cameras', rating: 4.8, reviews: 134, image: 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?w=400', featured: false, brand: 'Sony', stock: 9 },
+    { id: 15, name: 'Nikon Z8', price: 3499, category: 'cameras', rating: 4.7, reviews: 87, image: 'https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=400', featured: false, brand: 'Nikon', stock: 7 },
+    { id: 16, name: 'Fujifilm X-T5', price: 1699, category: 'cameras', rating: 4.6, reviews: 112, image: 'https://images.unsplash.com/photo-1502920917128-1aa500764cbd?w=400', featured: false, brand: 'Fujifilm', stock: 13 },
+    { id: 17, name: 'PlayStation 5', price: 499, category: 'gaming', rating: 4.9, reviews: 567, image: 'https://images.unsplash.com/photo-1606813907291-d86efa9b94db?w=400', featured: true, brand: 'Sony', stock: 34 },
+    { id: 18, name: 'Xbox Series X', price: 499, category: 'gaming', rating: 4.8, reviews: 432, image: 'https://images.unsplash.com/photo-1621259182978-fbf93132d53d?w=400', featured: false, brand: 'Microsoft', stock: 28 },
+    { id: 19, name: 'Nintendo Switch OLED', price: 349, category: 'gaming', rating: 4.7, reviews: 345, image: 'https://images.unsplash.com/photo-1578303512597-81e6cc155b3e?w=400', featured: false, brand: 'Nintendo', stock: 41 },
+    { id: 20, name: 'Steam Deck', price: 399, category: 'gaming', rating: 4.6, reviews: 234, image: 'https://images.unsplash.com/photo-1592840496694-26d035b52b48?w=400', featured: false, brand: 'Valve', stock: 25 },
   ]
 
   const filteredProducts = products.filter(product => {
@@ -67,7 +77,7 @@ const Products = () => {
           className="mb-8"
         >
           <h1 className="text-4xl font-bold text-gray-900 mb-2">All Products</h1>
-          <p className="text-gray-500">Browse our complete collection of premium electronics</p>
+          <p className="text-gray-500">Browse our complete collection of premium electronics ({sortedProducts.length} products)</p>
         </motion.div>
 
         {/* Search and Filters */}
@@ -77,48 +87,77 @@ const Products = () => {
           transition={{ delay: 0.1 }}
           className="card mb-8 p-6"
         >
-          <div className="flex flex-col lg:flex-row gap-4">
-            <div className="relative flex-1">
+          <div className="flex flex-col lg:flex-row gap-4 items-center">
+            <div className="relative flex-1 w-full">
               <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
               <input
                 type="text"
-                placeholder="Search products..."
+                placeholder="Search products by name, brand..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 className="input-field w-full pl-12"
               />
             </div>
-            <select
-              value={selectedCategory}
-              onChange={(e) => setSelectedCategory(e.target.value)}
-              className="input-field"
-            >
-              {categories.map(cat => (
-                <option key={cat} value={cat}>{cat.charAt(0).toUpperCase() + cat.slice(1)}</option>
-              ))}
-            </select>
-            <select
-              value={priceRange}
-              onChange={(e) => setPriceRange(e.target.value)}
-              className="input-field"
-            >
-              <option value="all">All Prices</option>
-              <option value="under-500">Under $500</option>
-              <option value="500-1000">$500 - $1000</option>
-              <option value="1000-2000">$1000 - $2000</option>
-              <option value="over-2000">Over $2000</option>
-            </select>
-            <select
-              value={sortBy}
-              onChange={(e) => setSortBy(e.target.value)}
-              className="input-field"
-            >
-              <option value="featured">Featured</option>
-              <option value="price-low">Price: Low to High</option>
-              <option value="price-high">Price: High to Low</option>
-              <option value="rating">Highest Rated</option>
-            </select>
+            <div className="flex gap-3 w-full lg:w-auto">
+              <select
+                value={selectedCategory}
+                onChange={(e) => setSelectedCategory(e.target.value)}
+                className="input-field flex-1 lg:flex-none"
+              >
+                {categories.map(cat => (
+                  <option key={cat} value={cat}>{cat.charAt(0).toUpperCase() + cat.slice(1)}</option>
+                ))}
+              </select>
+              <select
+                value={priceRange}
+                onChange={(e) => setPriceRange(e.target.value)}
+                className="input-field flex-1 lg:flex-none"
+              >
+                <option value="all">All Prices</option>
+                <option value="under-500">Under $500</option>
+                <option value="500-1000">$500 - $1000</option>
+                <option value="1000-2000">$1000 - $2000</option>
+                <option value="over-2000">Over $2000</option>
+              </select>
+              <select
+                value={sortBy}
+                onChange={(e) => setSortBy(e.target.value)}
+                className="input-field flex-1 lg:flex-none"
+              >
+                <option value="featured">Featured</option>
+                <option value="price-low">Price: Low to High</option>
+                <option value="price-high">Price: High to Low</option>
+                <option value="rating">Highest Rated</option>
+              </select>
+            </div>
           </div>
+          {/* Active Filters */}
+          {(selectedCategory !== 'all' || priceRange !== 'all' || searchTerm) && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: 'auto' }}
+              className="flex gap-2 mt-4 pt-4 border-t border-gray-200 flex-wrap"
+            >
+              {selectedCategory !== 'all' && (
+                <span className="inline-flex items-center gap-2 bg-blue-50 text-blue-600 px-3 py-1 rounded-full text-sm">
+                  {selectedCategory.charAt(0).toUpperCase() + selectedCategory.slice(1)}
+                  <button onClick={() => setSelectedCategory('all')} className="hover:text-blue-800">×</button>
+                </span>
+              )}
+              {priceRange !== 'all' && (
+                <span className="inline-flex items-center gap-2 bg-blue-50 text-blue-600 px-3 py-1 rounded-full text-sm">
+                  {priceRange.replace('-', ' - ').replace('under', 'Under $').replace('over', 'Over $')}
+                  <button onClick={() => setPriceRange('all')} className="hover:text-blue-800">×</button>
+                </span>
+              )}
+              {searchTerm && (
+                <span className="inline-flex items-center gap-2 bg-blue-50 text-blue-600 px-3 py-1 rounded-full text-sm">
+                  "{searchTerm}"
+                  <button onClick={() => setSearchTerm('')} className="hover:text-blue-800">×</button>
+                </span>
+              )}
+            </motion.div>
+          )}
         </motion.div>
 
         {/* Products Grid */}
@@ -133,34 +172,53 @@ const Products = () => {
               key={product.id}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.05 }}
+              transition={{ delay: 0.3 + index * 0.05 }}
             >
-              <div className="card group overflow-hidden">
+              <div className="card group overflow-hidden hover:shadow-2xl transition-all duration-500">
                 <Link to={`/products/${product.id}`} className="block">
                   <div className="relative overflow-hidden rounded-xl mb-4">
                     <img
                       src={product.image}
                       alt={product.name}
-                      className="w-full h-56 object-cover group-hover:scale-110 transition-transform duration-500"
+                      className="w-full h-56 object-cover group-hover:scale-110 transition-transform duration-700"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                    {product.featured && (
-                      <span className="absolute top-3 left-3 bg-gradient-to-r from-blue-600 to-blue-700 text-white text-xs px-3 py-1 rounded-full font-medium shadow-md">
-                        Featured
-                      </span>
-                    )}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    <div className="absolute top-3 left-3 flex gap-2">
+                      {product.featured && (
+                        <span className="bg-gradient-to-r from-blue-600 to-blue-700 text-white text-xs px-3 py-1 rounded-full font-medium shadow-md">
+                          Featured
+                        </span>
+                      )}
+                      {product.stock < 10 && (
+                        <span className="bg-red-500 text-white text-xs px-3 py-1 rounded-full font-medium shadow-md">
+                          Low Stock
+                        </span>
+                      )}
+                    </div>
+                    <div className="absolute top-3 right-3 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                      <button
+                        onClick={(e) => { e.preventDefault(); handleAddToWishlist(product); }}
+                        className="p-2 bg-white rounded-full shadow-lg hover:bg-red-50 hover:text-red-500 transition-colors"
+                      >
+                        <Heart className="w-4 h-4" />
+                      </button>
+                    </div>
                   </div>
-                  <h3 className="font-semibold mb-2 text-gray-900 text-lg group-hover:text-blue-600 transition-colors">{product.name}</h3>
-                  <div className="flex items-center gap-1 mb-3">
-                    <Star className="w-4 h-4 text-yellow-500 fill-current" />
-                    <span className="text-sm font-medium text-gray-700">{product.rating}</span>
-                    <span className="text-sm text-gray-500">({product.reviews})</span>
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <span className="text-2xl font-bold text-blue-600">${product.price}</span>
+                  <div className="px-2">
+                    <span className="text-xs text-gray-500 mb-1 block">{product.brand}</span>
+                    <h3 className="font-semibold mb-2 text-gray-900 text-lg group-hover:text-blue-600 transition-colors line-clamp-2">{product.name}</h3>
+                    <div className="flex items-center gap-1 mb-3">
+                      <Star className="w-4 h-4 text-yellow-500 fill-current" />
+                      <span className="text-sm font-medium text-gray-700">{product.rating}</span>
+                      <span className="text-sm text-gray-500">({product.reviews} reviews)</span>
+                    </div>
+                    <div className="flex items-center justify-between">
+                      <span className="text-2xl font-bold text-blue-600">${product.price}</span>
+                      <span className="text-sm text-gray-500">{product.stock} in stock</span>
+                    </div>
                   </div>
                 </Link>
-                <div className="flex gap-2 mt-4">
+                <div className="flex gap-2 mt-4 px-2 pb-2">
                   <button
                     onClick={() => handleAddToCart(product)}
                     className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2.5 rounded-lg text-sm font-medium shadow-md hover:shadow-lg transition-all flex-1"
@@ -189,7 +247,13 @@ const Products = () => {
               <Filter className="w-12 h-12 text-gray-400" />
             </div>
             <h3 className="text-xl font-semibold text-gray-900 mb-2">No Products Found</h3>
-            <p className="text-gray-500">Try adjusting your filters or search terms</p>
+            <p className="text-gray-500 mb-4">Try adjusting your filters or search terms</p>
+            <button
+              onClick={() => { setSearchTerm(''); setSelectedCategory('all'); setPriceRange('all'); }}
+              className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-medium"
+            >
+              Clear All Filters
+            </button>
           </motion.div>
         )}
       </div>

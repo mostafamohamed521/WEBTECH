@@ -1,11 +1,15 @@
+import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
-import { Trash2, Plus, Minus, ShoppingBag, ArrowRight } from 'lucide-react'
+import { Trash2, Plus, Minus, ShoppingBag, ArrowRight, Gift, Truck, Shield, Tag } from 'lucide-react'
 import useStore from '../context/StoreContext'
 import toast from 'react-hot-toast'
 
 const Cart = () => {
   const { cart, removeFromCart, updateQuantity, clearCart } = useStore()
+  const [promoCode, setPromoCode] = useState('')
+  const [promoApplied, setPromoApplied] = useState(false)
+  const [giftWrap, setGiftWrap] = useState(false)
 
   const handleQuantityChange = (productId, newQuantity) => {
     if (newQuantity < 1) return
@@ -17,9 +21,20 @@ const Cart = () => {
     toast.success(`${productName} removed from cart`)
   }
 
+  const handlePromoCode = () => {
+    if (promoCode.toLowerCase() === 'save20') {
+      setPromoApplied(true)
+      toast.success('Promo code applied! 20% off')
+    } else {
+      toast.error('Invalid promo code')
+    }
+  }
+
   const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0)
+  const discount = promoApplied ? subtotal * 0.2 : 0
+  const giftWrapCost = giftWrap ? cart.length * 5 : 0
   const shipping = subtotal > 0 ? (subtotal > 100 ? 0 : 10) : 0
-  const total = subtotal + shipping
+  const total = subtotal - discount + giftWrapCost + shipping
 
   if (cart.length === 0) {
     return (
@@ -65,7 +80,7 @@ const Cart = () => {
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: index * 0.05 }}
-                className="card p-6"
+                className="card p-6 hover:shadow-lg transition-all"
               >
                 <div className="flex gap-6">
                   <img
@@ -117,11 +132,70 @@ const Cart = () => {
               className="card p-6 sticky top-28"
             >
               <h2 className="text-2xl font-bold mb-6 text-gray-900">Order Summary</h2>
+              
+              {/* Promo Code */}
+              <div className="mb-6">
+                <div className="flex gap-2">
+                  <input
+                    type="text"
+                    placeholder="Promo code (try: SAVE20)"
+                    value={promoCode}
+                    onChange={(e) => setPromoCode(e.target.value)}
+                    className="input-field flex-1"
+                  />
+                  <button
+                    onClick={handlePromoCode}
+                    className="bg-gray-800 hover:bg-gray-900 text-white px-4 py-2 rounded-lg font-medium transition-colors"
+                  >
+                    Apply
+                  </button>
+                </div>
+                {promoApplied && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="mt-2 text-green-600 text-sm font-medium flex items-center gap-1"
+                  >
+                    <Tag className="w-4 h-4" />
+                    20% discount applied!
+                  </motion.div>
+                )}
+              </div>
+
+              {/* Gift Wrap */}
+              <div className="mb-6 p-4 bg-gray-50 rounded-xl">
+                <label className="flex items-center gap-3 cursor-pointer">
+                  <input
+                    type="checkbox"
+                    checked={giftWrap}
+                    onChange={(e) => setGiftWrap(e.target.checked)}
+                    className="w-5 h-5 text-blue-600 rounded"
+                  />
+                  <Gift className="w-5 h-5 text-blue-600" />
+                  <div>
+                    <span className="font-medium text-gray-900">Gift Wrap</span>
+                    <p className="text-sm text-gray-500">+$5 per item</p>
+                  </div>
+                </label>
+              </div>
+
               <div className="space-y-4 mb-6">
                 <div className="flex justify-between text-lg">
                   <span className="text-gray-500">Subtotal</span>
                   <span className="text-gray-900 font-medium">${subtotal.toFixed(2)}</span>
                 </div>
+                {discount > 0 && (
+                  <div className="flex justify-between text-lg text-green-600">
+                    <span>Discount</span>
+                    <span className="font-medium">-${discount.toFixed(2)}</span>
+                  </div>
+                )}
+                {giftWrapCost > 0 && (
+                  <div className="flex justify-between text-lg">
+                    <span className="text-gray-500">Gift Wrap</span>
+                    <span className="text-gray-900 font-medium">${giftWrapCost.toFixed(2)}</span>
+                  </div>
+                )}
                 <div className="flex justify-between text-lg">
                   <span className="text-gray-500">Shipping</span>
                   <span className="text-gray-900 font-medium">{shipping === 0 ? 'Free' : `$${shipping.toFixed(2)}`}</span>
@@ -131,6 +205,19 @@ const Cart = () => {
                   <span className="text-blue-600">${total.toFixed(2)}</span>
                 </div>
               </div>
+
+              {/* Benefits */}
+              <div className="space-y-3 mb-6">
+                <div className="flex items-center gap-3 text-sm text-gray-600">
+                  <Truck className="w-4 h-4 text-green-600" />
+                  <span>Free shipping on orders over $100</span>
+                </div>
+                <div className="flex items-center gap-3 text-sm text-gray-600">
+                  <Shield className="w-4 h-4 text-blue-600" />
+                  <span>Secure checkout guaranteed</span>
+                </div>
+              </div>
+
               <Link to="/checkout" className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-xl w-full flex items-center justify-center gap-2 mb-4 font-semibold shadow-lg hover:shadow-xl transition-all">
                 Proceed to Checkout <ArrowRight className="w-5 h-5" />
               </Link>

@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { CreditCard, Truck, Shield, CheckCircle, ArrowRight } from 'lucide-react'
+import { CreditCard, Truck, Shield, CheckCircle, ArrowRight, Clock, MapPin, Phone, Lock } from 'lucide-react'
 import useStore from '../context/StoreContext'
 import toast from 'react-hot-toast'
 
@@ -8,11 +8,12 @@ const Checkout = () => {
   const { cart, clearCart } = useStore()
   const [step, setStep] = useState(1)
   const [loading, setLoading] = useState(false)
+  const [deliveryOption, setDeliveryOption] = useState('standard')
 
   const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0)
-  const shipping = subtotal > 100 ? 0 : 10
+  const shippingCost = deliveryOption === 'express' ? 25 : (subtotal > 100 ? 0 : 10)
   const tax = subtotal * 0.08
-  const total = subtotal + shipping + tax
+  const total = subtotal + shippingCost + tax
 
   const handlePlaceOrder = () => {
     setLoading(true)
@@ -55,12 +56,12 @@ const Checkout = () => {
           transition={{ delay: 0.1 }}
           className="flex items-center justify-between mb-12 overflow-x-auto"
         >
-          {['Shipping', 'Payment', 'Review', 'Complete'].map((s, index) => (
+          {['Shipping', 'Delivery', 'Payment', 'Review', 'Complete'].map((s, index) => (
             <div key={s} className="flex items-center flex-shrink-0">
               <div className={`flex items-center justify-center w-12 h-12 rounded-full ${step > index + 1 ? 'bg-green-500' : step === index + 1 ? 'bg-blue-600' : 'bg-gray-300'} shadow-md`}>
                 {step > index + 1 ? <CheckCircle className="w-6 h-6 text-white" /> : <span className="text-white font-semibold">{index + 1}</span>}
               </div>
-              {(index < 3) && <div className={`w-20 h-1 mx-2 ${step > index + 1 ? 'bg-green-500' : step === index + 1 ? 'bg-blue-600' : 'bg-gray-300'}`} />}
+              {(index < 4) && <div className={`w-16 h-1 mx-2 ${step > index + 1 ? 'bg-green-500' : step === index + 1 ? 'bg-blue-600' : 'bg-gray-300'}`} />}
               <span className={`ml-2 font-medium ${step === index + 1 ? 'text-blue-600' : 'text-gray-500'}`}>{s}</span>
             </div>
           ))}
@@ -77,7 +78,7 @@ const Checkout = () => {
               >
                 <h2 className="text-2xl font-bold mb-6 flex items-center gap-3 text-gray-900">
                   <div className="p-2 bg-blue-50 rounded-xl">
-                    <Truck className="w-6 h-6 text-blue-600" />
+                    <MapPin className="w-6 h-6 text-blue-600" />
                   </div>
                   Shipping Information
                 </h2>
@@ -85,39 +86,96 @@ const Checkout = () => {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
                       <label className="block text-sm font-medium mb-2 text-gray-700">First Name</label>
-                      <input type="text" className="input-field w-full" />
+                      <input type="text" className="input-field w-full" placeholder="John" />
                     </div>
                     <div>
                       <label className="block text-sm font-medium mb-2 text-gray-700">Last Name</label>
-                      <input type="text" className="input-field w-full" />
+                      <input type="text" className="input-field w-full" placeholder="Doe" />
                     </div>
                   </div>
                   <div>
                     <label className="block text-sm font-medium mb-2 text-gray-700">Email Address</label>
-                    <input type="email" className="input-field w-full" />
+                    <input type="email" className="input-field w-full" placeholder="john@example.com" />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium mb-2 text-gray-700">Phone Number</label>
+                    <input type="tel" className="input-field w-full" placeholder="+1 (555) 000-0000" />
                   </div>
                   <div>
                     <label className="block text-sm font-medium mb-2 text-gray-700">Street Address</label>
-                    <input type="text" className="input-field w-full" />
+                    <input type="text" className="input-field w-full" placeholder="123 Main Street" />
                   </div>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
                       <label className="block text-sm font-medium mb-2 text-gray-700">City</label>
-                      <input type="text" className="input-field w-full" />
+                      <input type="text" className="input-field w-full" placeholder="New York" />
                     </div>
                     <div>
                       <label className="block text-sm font-medium mb-2 text-gray-700">ZIP Code</label>
-                      <input type="text" className="input-field w-full" />
+                      <input type="text" className="input-field w-full" placeholder="10001" />
                     </div>
                   </div>
                   <button onClick={() => setStep(2)} className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-xl w-full flex items-center justify-center gap-2 font-semibold shadow-lg hover:shadow-xl transition-all">
-                    Continue to Payment <ArrowRight className="w-5 h-5" />
+                    Continue to Delivery <ArrowRight className="w-5 h-5" />
                   </button>
                 </form>
               </motion.div>
             )}
 
             {step === 2 && (
+              <motion.div
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                className="card p-8"
+              >
+                <h2 className="text-2xl font-bold mb-6 flex items-center gap-3 text-gray-900">
+                  <div className="p-2 bg-blue-50 rounded-xl">
+                    <Truck className="w-6 h-6 text-blue-600" />
+                  </div>
+                  Delivery Options
+                </h2>
+                <div className="space-y-4 mb-6">
+                  <div 
+                    onClick={() => setDeliveryOption('standard')}
+                    className={`p-6 border-2 rounded-xl cursor-pointer transition-all ${deliveryOption === 'standard' ? 'border-blue-600 bg-blue-50' : 'border-gray-300 hover:border-blue-300'}`}
+                  >
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-4">
+                        <input type="radio" name="delivery" checked={deliveryOption === 'standard'} className="w-5 h-5 text-blue-600" />
+                        <div>
+                          <h3 className="font-semibold text-gray-900">Standard Delivery</h3>
+                          <p className="text-sm text-gray-500 flex items-center gap-1"><Clock className="w-4 h-4" /> 5-7 business days</p>
+                        </div>
+                      </div>
+                      <span className="font-bold text-gray-900">{shippingCost === 0 ? 'Free' : `$${shippingCost.toFixed(2)}`}</span>
+                    </div>
+                  </div>
+                  <div 
+                    onClick={() => setDeliveryOption('express')}
+                    className={`p-6 border-2 rounded-xl cursor-pointer transition-all ${deliveryOption === 'express' ? 'border-blue-600 bg-blue-50' : 'border-gray-300 hover:border-blue-300'}`}
+                  >
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-4">
+                        <input type="radio" name="delivery" checked={deliveryOption === 'express'} className="w-5 h-5 text-blue-600" />
+                        <div>
+                          <h3 className="font-semibold text-gray-900">Express Delivery</h3>
+                          <p className="text-sm text-gray-500 flex items-center gap-1"><Clock className="w-4 h-4" /> 1-2 business days</p>
+                        </div>
+                      </div>
+                      <span className="font-bold text-gray-900">$25.00</span>
+                    </div>
+                  </div>
+                </div>
+                <div className="flex gap-4">
+                  <button onClick={() => setStep(1)} className="bg-gray-200 hover:bg-gray-300 text-gray-800 px-6 py-3 rounded-xl flex-1 font-medium transition-all">Back</button>
+                  <button onClick={() => setStep(3)} className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-xl flex-1 font-semibold shadow-lg hover:shadow-xl transition-all">
+                    Continue to Payment <ArrowRight className="w-5 h-5 ml-2" />
+                  </button>
+                </div>
+              </motion.div>
+            )}
+
+            {step === 3 && (
               <motion.div
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
@@ -158,9 +216,13 @@ const Checkout = () => {
                       </div>
                     </div>
                   </div>
+                  <div className="flex items-center gap-2 text-sm text-gray-500 mt-4">
+                    <Lock className="w-4 h-4 text-green-600" />
+                    <span>Your payment information is secure and encrypted</span>
+                  </div>
                   <div className="flex gap-4 mt-6">
-                    <button onClick={() => setStep(1)} className="bg-gray-200 hover:bg-gray-300 text-gray-800 px-6 py-3 rounded-xl flex-1 font-medium transition-all">Back</button>
-                    <button onClick={() => setStep(3)} className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-xl flex-1 font-semibold shadow-lg hover:shadow-xl transition-all">
+                    <button onClick={() => setStep(2)} className="bg-gray-200 hover:bg-gray-300 text-gray-800 px-6 py-3 rounded-xl flex-1 font-medium transition-all">Back</button>
+                    <button onClick={() => setStep(4)} className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-xl flex-1 font-semibold shadow-lg hover:shadow-xl transition-all">
                       Review Order <ArrowRight className="w-5 h-5 ml-2" />
                     </button>
                   </div>
@@ -168,7 +230,7 @@ const Checkout = () => {
               </motion.div>
             )}
 
-            {step === 3 && (
+            {step === 4 && (
               <motion.div
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
@@ -181,14 +243,14 @@ const Checkout = () => {
                       <img src={item.image} alt={item.name} className="w-20 h-20 object-cover rounded-xl" />
                       <div className="flex-1">
                         <h3 className="font-semibold text-gray-900">{item.name}</h3>
-                        <p className="text-sm text-gray-500">Qty: {item.quantity}</p>
+                        <p className="text-sm text-gray-500">Qty: {item.quantity} × ${item.price}</p>
                       </div>
                       <p className="font-bold text-gray-900 text-lg">${(item.price * item.quantity).toFixed(2)}</p>
                     </div>
                   ))}
                 </div>
                 <div className="flex gap-4">
-                  <button onClick={() => setStep(2)} className="bg-gray-200 hover:bg-gray-300 text-gray-800 px-6 py-3 rounded-xl flex-1 font-medium transition-all">Back</button>
+                  <button onClick={() => setStep(3)} className="bg-gray-200 hover:bg-gray-300 text-gray-800 px-6 py-3 rounded-xl flex-1 font-medium transition-all">Back</button>
                   <button onClick={handlePlaceOrder} disabled={loading} className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-xl flex-1 font-semibold shadow-lg hover:shadow-xl transition-all">
                     {loading ? 'Processing...' : 'Place Order'}
                   </button>
@@ -196,7 +258,7 @@ const Checkout = () => {
               </motion.div>
             )}
 
-            {step === 4 && (
+            {step === 5 && (
               <motion.div
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
@@ -206,8 +268,12 @@ const Checkout = () => {
                   <CheckCircle className="w-12 h-12 text-green-500" />
                 </div>
                 <h2 className="text-3xl font-bold mb-4 text-gray-900">Order Placed Successfully!</h2>
-                <p className="text-gray-500 mb-8 text-lg">Thank you for your purchase. You will receive an email confirmation shortly.</p>
-                <button className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all">Continue Shopping</button>
+                <p className="text-gray-500 mb-4 text-lg">Thank you for your purchase.</p>
+                <p className="text-gray-500 mb-8">Order confirmation will be sent to your email address.</p>
+                <div className="flex gap-4 justify-center">
+                  <button className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all">Track Order</button>
+                  <button className="bg-gray-200 hover:bg-gray-300 text-gray-800 px-8 py-3 rounded-xl font-semibold transition-all">Continue Shopping</button>
+                </div>
               </motion.div>
             )}
           </div>
@@ -228,7 +294,7 @@ const Checkout = () => {
                 </div>
                 <div className="flex justify-between text-lg">
                   <span className="text-gray-500">Shipping</span>
-                  <span className="text-gray-900 font-medium">{shipping === 0 ? 'Free' : `$${shipping.toFixed(2)}`}</span>
+                  <span className="text-gray-900 font-medium">{shippingCost === 0 ? 'Free' : `$${shippingCost.toFixed(2)}`}</span>
                 </div>
                 <div className="flex justify-between text-lg">
                   <span className="text-gray-500">Tax</span>
@@ -239,9 +305,15 @@ const Checkout = () => {
                   <span className="text-blue-600">${total.toFixed(2)}</span>
                 </div>
               </div>
-              <div className="flex items-center gap-3 text-sm text-gray-500 bg-blue-50 p-4 rounded-xl">
-                <Shield className="w-5 h-5 text-blue-600" />
-                <span className="font-medium">Secure checkout powered by Stripe</span>
+              <div className="space-y-3 mb-6">
+                <div className="flex items-center gap-3 text-sm text-gray-600">
+                  <Shield className="w-4 h-4 text-blue-600" />
+                  <span>Secure checkout powered by Stripe</span>
+                </div>
+                <div className="flex items-center gap-3 text-sm text-gray-600">
+                  <Truck className="w-4 h-4 text-green-600" />
+                  <span>Free shipping on orders over $100</span>
+                </div>
               </div>
             </motion.div>
           </div>
