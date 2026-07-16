@@ -70,14 +70,14 @@ const Products = () => {
 
   return (
     <div className="min-h-screen">
-      <div className="container mx-auto px-6 py-12">
+      <div className="container mx-auto px-4 py-8 md:py-12">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="mb-8"
+          className="mb-6 md:mb-8"
         >
-          <h1 className="text-4xl font-bold text-gray-900 mb-2">All Products</h1>
-          <p className="text-gray-500">Browse our complete collection of premium electronics ({sortedProducts.length} products)</p>
+          <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-1 md:mb-2">All Products</h1>
+          <p className="text-gray-500 text-sm md:text-base">Browse our complete collection of premium electronics ({sortedProducts.length} products)</p>
         </motion.div>
 
         {/* Search and Filters */}
@@ -85,17 +85,17 @@ const Products = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
-          className="card mb-8 p-6"
+          className="card mb-6 md:mb-8 p-4 md:p-6"
         >
-          <div className="flex flex-col lg:flex-row gap-4 items-center">
+          <div className="flex flex-col lg:flex-row gap-3 md:gap-4 items-center">
             <div className="relative flex-1 w-full">
-              <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+              <Search className="absolute left-3 md:left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4 md:w-5 md:h-5" />
               <input
                 type="text"
                 placeholder="Search products by name, brand..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="input-field w-full pl-12"
+                className="input-field w-full pl-10 md:pl-12 text-sm md:text-base"
               />
             </div>
             <div className="flex gap-3 w-full lg:w-auto">
@@ -165,7 +165,7 @@ const Products = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6"
         >
           {sortedProducts.map((product, index) => (
             <motion.div
@@ -174,28 +174,28 @@ const Products = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3 + index * 0.05 }}
             >
-              <div className="card group overflow-hidden hover:shadow-2xl transition-all duration-500">
+              <div className="card group overflow-hidden hover:shadow-xl transition-all duration-500">
                 <Link to={`/products/${product.id}`} className="block">
-                  <div className="relative overflow-hidden rounded-xl mb-4">
+                  <div className="relative overflow-hidden rounded-xl mb-3 md:mb-4">
                     <img
                       src={product.image}
                       alt={product.name}
-                      className="w-full h-56 object-cover group-hover:scale-110 transition-transform duration-700"
+                      className="w-full h-40 md:h-48 lg:h-56 object-cover group-hover:scale-110 transition-transform duration-700"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                    <div className="absolute top-3 left-3 flex gap-2">
+                    <div className="absolute top-2 md:top-3 left-2 md:left-3 flex gap-1 md:gap-2">
                       {product.featured && (
-                        <span className="bg-gradient-to-r from-blue-600 to-blue-700 text-white text-xs px-3 py-1 rounded-full font-medium shadow-md">
+                        <span className="bg-gradient-to-r from-blue-600 to-blue-700 text-white text-xs px-2 py-0.5 md:px-3 md:py-1 rounded-full font-medium shadow-md">
                           Featured
                         </span>
                       )}
                       {product.stock < 10 && (
-                        <span className="bg-red-500 text-white text-xs px-3 py-1 rounded-full font-medium shadow-md">
+                        <span className="bg-red-500 text-white text-xs px-2 py-0.5 md:px-3 md:py-1 rounded-full font-medium shadow-md">
                           Low Stock
                         </span>
                       )}
                     </div>
-                    <div className="absolute top-3 right-3 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                    <div className="absolute top-2 md:top-3 right-2 md:right-3 flex gap-1 md:gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
                       <button
                         onClick={(e) => { e.preventDefault(); handleAddToWishlist(product); }}
                         className="p-2 bg-white rounded-full shadow-lg hover:bg-red-50 hover:text-red-500 transition-colors"
@@ -206,30 +206,30 @@ const Products = () => {
                   </div>
                   <div className="px-2">
                     <span className="text-xs text-gray-500 mb-1 block">{product.brand}</span>
-                    <h3 className="font-semibold mb-2 text-gray-900 text-lg group-hover:text-blue-600 transition-colors line-clamp-2">{product.name}</h3>
-                    <div className="flex items-center gap-1 mb-3">
-                      <Star className="w-4 h-4 text-yellow-500 fill-current" />
-                      <span className="text-sm font-medium text-gray-700">{product.rating}</span>
-                      <span className="text-sm text-gray-500">({product.reviews} reviews)</span>
+                    <h3 className="font-semibold mb-2 text-gray-900 text-sm md:text-base lg:text-lg group-hover:text-blue-600 transition-colors line-clamp-2">{product.name}</h3>
+                    <div className="flex items-center gap-1 mb-2 md:mb-3">
+                      <Star className="w-3 h-3 md:w-4 md:h-4 text-yellow-500 fill-current" />
+                      <span className="text-xs md:text-sm font-medium text-gray-700">{product.rating}</span>
+                      <span className="text-xs md:text-sm text-gray-500">({product.reviews})</span>
                     </div>
                     <div className="flex items-center justify-between">
-                      <span className="text-2xl font-bold text-blue-600">${product.price}</span>
-                      <span className="text-sm text-gray-500">{product.stock} in stock</span>
+                      <span className="text-lg md:text-xl lg:text-2xl font-bold text-blue-600">${product.price}</span>
+                      <span className="text-xs md:text-sm text-gray-500 hidden sm:inline">{product.stock} in stock</span>
                     </div>
                   </div>
                 </Link>
-                <div className="flex gap-2 mt-4 px-2 pb-2">
+                <div className="flex gap-2 mt-3 md:mt-4 px-2 pb-2">
                   <button
                     onClick={() => handleAddToCart(product)}
-                    className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2.5 rounded-lg text-sm font-medium shadow-md hover:shadow-lg transition-all flex-1"
+                    className="bg-blue-600 hover:bg-blue-700 text-white px-3 py-2 md:px-4 md:py-2.5 rounded-lg text-xs md:text-sm font-medium shadow-md hover:shadow-lg transition-all flex-1"
                   >
                     Add to Cart
                   </button>
                   <button
                     onClick={() => handleAddToWishlist(product)}
-                    className="p-2.5 border border-gray-300 rounded-lg hover:border-blue-600 hover:bg-blue-50 transition-colors"
+                    className="p-2 md:p-2.5 border border-gray-300 rounded-lg hover:border-blue-600 hover:bg-blue-50 transition-colors"
                   >
-                    <Heart className="w-5 h-5 text-gray-600" />
+                    <Heart className="w-4 h-4 md:w-5 md:h-5 text-gray-600" />
                   </button>
                 </div>
               </div>
@@ -241,16 +241,16 @@ const Products = () => {
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            className="text-center py-16"
+            className="text-center py-12 md:py-16"
           >
-            <div className="w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-6">
-              <Filter className="w-12 h-12 text-gray-400" />
+            <div className="w-16 h-16 md:w-24 md:h-24 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4 md:mb-6">
+              <Filter className="w-8 h-8 md:w-12 md:h-12 text-gray-400" />
             </div>
-            <h3 className="text-xl font-semibold text-gray-900 mb-2">No Products Found</h3>
-            <p className="text-gray-500 mb-4">Try adjusting your filters or search terms</p>
+            <h3 className="text-lg md:text-xl font-semibold text-gray-900 mb-2">No Products Found</h3>
+            <p className="text-gray-500 mb-4 text-sm md:text-base">Try adjusting your filters or search terms</p>
             <button
               onClick={() => { setSearchTerm(''); setSelectedCategory('all'); setPriceRange('all'); }}
-              className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-medium"
+              className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 md:px-6 md:py-2 rounded-lg font-medium text-sm md:text-base"
             >
               Clear All Filters
             </button>
