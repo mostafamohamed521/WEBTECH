@@ -1,66 +1,77 @@
-from rest_framework import viewsets, status
-from rest_framework.decorators import action
+from rest_framework import viewsets, status, generics
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from django_filters.rest_framework import DjangoFilterBackend
-from .models import Cart, CartItem, Order, OrderItem
-from .serializers import CartSerializer, CartItemSerializer, OrderSerializer, OrderItemSerializer
+from django.db import transaction
 
-class CartViewSet(viewsets.ModelViewSet):
-    queryset = Cart.objects.all()
-    serializer_class = CartSerializer
-    
-    def get_queryset(self):
-        if self.request.user.is_authenticated:
-            return Cart.objects.filter(user=self.request.user)
-        return Cart.objects.none()
-    
-    @action(detail=False, methods=['post'])
-    def add_item(self, request):
-        cart, created = Cart.objects.get_or_create(user=request.user)
-        product_id = request.data.get('product_id')
-        quantity = request.data.get('quantity', 1)
-        
-        try:
-            from products.models import Product
-            product = Product.objects.get(id=product_id)
-        except Product.DoesNotExist:
-            return Response({'error': 'Product not found'}, status=status.HTTP_404_NOT_FOUND)
-        
-        cart_item, created = CartItem.objects.get_or_create(
-            cart=cart,
-            product=product,
-            defaults={'quantity': quantity}
-        )
-        
-        if not created:
-            cart_item.quantity += quantity
-            cart_item.save()
-        
-        serializer = CartItemSerializer(cart_item)
-        return Response(serializer.data)
-    
-    @action(detail=False, methods=['post'])
-    def remove_item(self, request):
-        cart = Cart.objects.get(user=request.user)
-        product_id = request.data.get('product_id')
-        
-        try:
-            cart_item = CartItem.objects.get(cart=cart, product_id=product_id)
-            cart_item.delete()
-            return Response({'message': 'Item removed from cart'})
-        except CartItem.DoesNotExist:
-            return Response({'error': 'Item not in cart'}, status=status.HTTP_404_NOT_FOUND)
+from .models import Order, OrderItem
+from .serializers import OrderSerializer, CreateOrderSerializer
+from cart.models import Cart, CartItem
 
-class OrderViewSet(viewsets.ModelViewSet):
-    queryset = Order.objects.all()
+
+class OrderViewSet(viewsets.ReadOnlyModelViewSet):
+    permission_classes = [IsAuthenticated]
     serializer_class = OrderSerializer
     filter_backends = [DjangoFilterBackend]
-    filterset_fields = ['status']
+    filterset_fields = ['status', 'payment_status']
     
     def get_queryset(self):
-        if self.request.user.is_authenticated:
-            return Order.objects.filter(user=self.request.user)
-        return Order.objects.none()
+        return Order.objects.filter(user=self.request.user).prefetch_related('items__product')
+
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def create_order_view(request):
+    """
+    Create order from cart
+    """
+    serializer = CreateOrderSerializer(data=request.data)
+    serializer.is_valid(raise_exception=True)
     
-    def perform_create(self, serializer):
-        serializer.save(user=self.request.user)
+    # Get user's cart
+    try:
+        cart = Cart.objects.get(user=request.user)
+    except Cart.DoesNotExist:
+        return Response({'error': 'Cart is empty'}, status=status.HTTP_400_BAD_REQUEST)
+    
+    cart_items = cart.items.all()
+    if not cart_items.exists():
+        return Response({'error': 'Cart is empty'}, status=status.HTTP_400_BAD_REQUEST)
+    
+    # Calculate totals
+    subtotal = sum(item.total_price for item in cart_items)
+    shipping_cost = 10 if subtotal < 100 else 0  # Free shipping over $100
+    total_amount = subtotal + shipping_cost
+    
+    # Create order
+    with transaction.atomic():
+        order = Order.objects.create(
+            user=request.user,
+            subtotal=subtotal,
+            shipping_cost=shipping_cost,
+            total_amount=total_amount,
+            shipping_address=serializer.validated_data['shipping_address'],
+            city=serializer.validated_data['city'],
+            phone=serializer.validated_data['phone'],
+            notes=serializer.validated_data.get('notes', '')
+        )
+        
+        # Create order items and update stock
+        for cart_item in cart_items:
+            OrderItem.objects.create(
+                order=order,
+                product=cart_item.product,
+                quantity=cart_item.quantity,
+                price=cart_item.product.final_price
+            )
+            
+            # Update product stock
+            cart_item.product.stock -= cart_item.quantity
+            cart_item.product.save()
+        
+        # Clear cart
+        cart_items.delete()
+    
+    order_serializer = OrderSerializer(order)
+    return Response(order_serializer.data, status=status.HTTP_201_CREATED)

@@ -1,29 +1,18 @@
 from rest_framework import serializers
-from .models import Cart, CartItem, Order, OrderItem
+from .models import Order, OrderItem
+from products.serializers import ProductListSerializer
 
-class CartItemSerializer(serializers.ModelSerializer):
-    product_name = serializers.CharField(source='product.name', read_only=True)
-    product_price = serializers.DecimalField(source='product.price', read_only=True, max_digits=10, decimal_places=2)
-    product_image = serializers.URLField(source='product.image', read_only=True)
-    
-    class Meta:
-        model = CartItem
-        fields = ['id', 'product', 'product_name', 'product_price', 'product_image', 'quantity', 'added_at']
-
-class CartSerializer(serializers.ModelSerializer):
-    items = CartItemSerializer(many=True, read_only=True)
-    
-    class Meta:
-        model = Cart
-        fields = '__all__'
 
 class OrderItemSerializer(serializers.ModelSerializer):
-    product_name = serializers.CharField(source='product.name', read_only=True)
-    product_image = serializers.URLField(source='product.image', read_only=True)
+    product = ProductListSerializer(read_only=True)
+    product_id = serializers.IntegerField(write_only=True)
+    total_price = serializers.ReadOnlyField()
     
     class Meta:
         model = OrderItem
-        fields = ['id', 'product', 'product_name', 'product_image', 'quantity', 'price']
+        fields = ['id', 'order', 'product', 'product_id', 'quantity', 'price', 'total_price']
+        read_only_fields = ['id', 'order']
+
 
 class OrderSerializer(serializers.ModelSerializer):
     items = OrderItemSerializer(many=True, read_only=True)
@@ -31,5 +20,15 @@ class OrderSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = Order
-        fields = '__all__'
-        read_only_fields = ['user']
+        fields = ['id', 'user', 'order_number', 'status', 'payment_status', 
+                  'subtotal', 'shipping_cost', 'discount', 'total_amount',
+                  'shipping_address', 'city', 'phone', 'notes', 'items', 
+                  'created_at', 'updated_at']
+        read_only_fields = ['id', 'user', 'order_number', 'created_at', 'updated_at']
+
+
+class CreateOrderSerializer(serializers.Serializer):
+    shipping_address = serializers.CharField()
+    city = serializers.CharField(max_length=100)
+    phone = serializers.CharField(max_length=20)
+    notes = serializers.CharField(required=False, allow_blank=True)

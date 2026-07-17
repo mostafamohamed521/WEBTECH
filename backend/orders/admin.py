@@ -1,25 +1,26 @@
 from django.contrib import admin
-from .models import Cart, CartItem, Order, OrderItem
+from .models import Order, OrderItem
 
-@admin.register(Cart)
-class CartAdmin(admin.ModelAdmin):
-    list_display = ['user', 'created_at', 'updated_at']
-    search_fields = ['user__username']
 
-@admin.register(CartItem)
-class CartItemAdmin(admin.ModelAdmin):
-    list_display = ['cart', 'product', 'quantity', 'added_at']
-    list_filter = ['added_at']
-    search_fields = ['product__name']
+class OrderItemInline(admin.TabularInline):
+    model = OrderItem
+    extra = 0
+    readonly_fields = ['total_price']
+
 
 @admin.register(Order)
 class OrderAdmin(admin.ModelAdmin):
-    list_display = ['id', 'user', 'status', 'total_amount', 'created_at']
-    list_filter = ['status', 'created_at']
-    search_fields = ['user__username', 'shipping_address']
-    list_editable = ['status']
+    list_display = ['order_number', 'user', 'status', 'payment_status', 'total_amount', 'created_at']
+    list_filter = ['status', 'payment_status', 'created_at']
+    search_fields = ['order_number', 'user__email', 'user__username', 'shipping_address']
+    list_editable = ['status', 'payment_status']
+    readonly_fields = ['order_number', 'created_at', 'updated_at']
+    inlines = [OrderItemInline]
+
 
 @admin.register(OrderItem)
 class OrderItemAdmin(admin.ModelAdmin):
-    list_display = ['order', 'product', 'quantity', 'price']
-    list_filter = ['order']
+    list_display = ['order', 'product', 'quantity', 'price', 'total_price']
+    list_filter = ['order__status']
+    search_fields = ['order__order_number', 'product__name']
+    readonly_fields = ['total_price']
